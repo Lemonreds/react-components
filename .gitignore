@@ -9,6 +9,7 @@
 
 # production
 /dist
+/react-components
 
 # misc
 .DS_Store

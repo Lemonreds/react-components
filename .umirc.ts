@@ -10,6 +10,9 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  publicPath: '/react-components/',
+  base:'/react-components/',
+  outputPath: '/react-components/',
   alias: {
     pages: resolve('src/pages'),
     components: resolve('src/components'),
