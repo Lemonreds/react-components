@@ -19,5 +19,6 @@ export default defineConfig({
     assets: resolve('src/assets'),
     examples: resolve('src/examples'),
     utils: resolve('src/utils'),
+    hooks: resolve('src/hooks'),
   },
 });
