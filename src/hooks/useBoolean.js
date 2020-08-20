@@ -2,10 +2,8 @@ import { useState } from 'React';
 
 /**
  *
- * @hooks useBoolean
+ * @hook useBoolean
  * @desc 管理boolean状态的hook
- * @at 2020/08/09
- * @by lmh
  *
  */
 const useBoolean = (value) => {

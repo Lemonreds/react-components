@@ -3,6 +3,7 @@ import useBoolean from './useBoolean';
 
 const defaultPagination = { pageNum: 1, pageSize: 10 };
 
+// @cbd/utils
 const shallowEquals = (obj1, obj2) => {
   if (obj1 == null || obj2 == null) {
     if (obj1 == null && obj2 == null) return true;
@@ -22,33 +23,29 @@ const shallowEquals = (obj1, obj2) => {
 
 /**
  *
- * @hooks useTable
+ * @hook useTable
  * @desc 统一管理antd Table组件的状态
  * @at 2020/08/09
  * @by lmh
  *
  */
-const useTable = (
-  services,
-  initQuery = undefined,
-  initialPagination = defaultPagination,
-) => {
+const useTable = (services, initQuery = undefined, initialPagination = defaultPagination) => {
   const [loading, { setTrue, setFalse }] = useBoolean(false);
   const [query, setQuery] = useState(initQuery);
   const [pagination, setPagination] = useState(initialPagination);
   const [data, setData] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const get = () => {
     setTrue();
     services({ ...pagination, ...query })
-      .then(resp => {
+      .then((resp) => {
         if (resp.errCode === 0) {
-          setTotalCount(resp.totalCount);
+          setTotal(resp.totalCount);
           setData(resp.data);
         }
       })
-      .finally(() => setFalse());
+      .finally(setFalse);
   };
 
   useEffect(() => {
@@ -59,7 +56,7 @@ const useTable = (
   // ref https://github.com/ant-design/ant-design/issues/25434
   const onChange = (pageNum, pageSize) => setPagination({ pageNum, pageSize });
 
-  const updateQuery = newQuery => {
+  const updateQuery = (newQuery) => {
     if (!shallowEquals(newQuery, query)) {
       setQuery(newQuery);
       setPagination({ ...pagination, pageNum: 1 });
@@ -67,7 +64,7 @@ const useTable = (
   };
 
   return [
-    { data, loading, totalCount, pagination },
+    { data, loading, total, pagination },
     { onChange, updateQuery },
   ];
 };
