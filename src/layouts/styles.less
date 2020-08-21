@@ -1,0 +1,49 @@
+.root {
+  padding-top: 64px;
+  .navbar {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 58px;
+    height: 64px;
+    width: 100%;
+    white-space: nowrap;
+    background: #fff;
+    box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .links {
+      display: flex;
+      width: 30%;
+      > a {
+        width: 84px;
+        height: 64px;
+        margin: 0 40px;
+        display: inline-block;
+        text-align: center;
+        color: #4d5164;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 64px;
+        text-decoration: none;
+        letter-spacing: 0;
+        transition: color 0.18s ease-in-out;
+        &:hover {
+          color: #4569d4;
+        }
+      }
+    }
+    .acitve {
+      color: #4569d4;
+    }
+  }
+}
+body {
+  margin: 0 !important;
+}
