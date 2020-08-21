@@ -4,7 +4,7 @@ const noop = () => undefined;
 const isSupportObserver = !!window.IntersectionObserver;
 const instances = new Map(); // use a  map to save callback and target
 
-const getInstance = () =>
+const getObserver = () =>
   isSupportObserver
     ? new window.IntersectionObserver(
       (entries) => {
@@ -13,7 +13,7 @@ const getInstance = () =>
           if (isIntersecting && intersectionRatio > 0) {
             // dom in view
             const instance = instances.get(target);
-            // emit callback
+            // excute callback
             if (instance) {
               const { callback } = instance;
               callback(target);
@@ -25,12 +25,12 @@ const getInstance = () =>
       },
       {
         root: null, // use html as observer
-        //   rootMargin: '50px 25px 50px 25px', // preload margin
+        //   rootMargin: '50px 25px 50px 25px', // preload
       }
     )
     : { observe: noop, unobserve: noop }; // useless here.
 
-const observer = getInstance();
+const observer = getObserver();
 
 const observe = (ele, callback) => {
   observer.observe(ele);
@@ -44,15 +44,14 @@ const unobserve = (ele) => {
 
 /**
  *
- * @hook useObserver
- * @desc 判断dom元素进入页面可视区域，仅触发一次，可用于图片或组件的lazyload
- * @at 2020/08/20
+ * @hook useOnScreen
+ * @desc 判断dom元素进入页面可视区域，`仅触发一次`，可用于图片或组件的lazyload
+ * @at 2020/08/09
  * @by lmh
- *@ref https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver
- *@ref http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html
+ * @ref https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver/IntersectionObserver
  *
  */
-const useObserver = (ref) => {
+const useOnScreen = (ref) => {
   const [visible, setVisible] = useState(!isSupportObserver);
 
   useEffect(() => {
@@ -68,4 +67,4 @@ const useObserver = (ref) => {
   return [visible];
 };
 
-export default useObserver;
+export default useOnScreen;

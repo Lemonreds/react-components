@@ -1,4 +1,5 @@
-import { useState, useRef, useMemo, useEffect } from 'React';
+import { useState, useRef, useMemo, useEffect } from 'react';
+import { isFunction } from './utils';
 
 // generate a unique key.
 // let id = 0x996;
@@ -7,17 +8,12 @@ import { useState, useRef, useMemo, useEffect } from 'React';
 //   return id;
 // };
 
-const isFunction = fn => fn instanceof Function;
-
-const containerStyle = { position: 'relative', overflow: 'auto' };
-const wrapperStyle = { overflow: 'hidden' };
-
 const overflowCount = 5;
 
 /**
  *
  * @hook useVirtual
- * @desc 虚拟长列表，支持相同高度、不同高度的子项
+ * @desc 虚拟长列表
  * @at 2020/08/12
  * @by lmh
  * @ref https://hooks.umijs.org/hooks/ui/use-virtual-list 的又一个实现
@@ -33,7 +29,7 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
   }, []);
 
   const [cache, warpperHeight] = useMemo(() => {
-    const c = new Map(); // use map as itemHeight's cahces
+    const c = new Map(); // use map as itemHeight's caches
 
     if (isFunction(itemHeight)) {
       let h = 0;
@@ -51,9 +47,9 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
       generate();
       e.preventDefault();
     },
-    style: { ...containerStyle, height },
+    style: { position: 'relative', overflow: 'auto', height },
   };
-  const wrapperProps = { style: { ...wrapperStyle, height: warpperHeight } };
+  const wrapperProps = { style: { overflow: 'hidden', height: warpperHeight } };
 
   const getItemHeight = (index) => {
     if (!isFunction(itemHeight)) return itemHeight;
@@ -111,6 +107,7 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
         startOverflowCount -= 1;
       }
     }
+
     setList(shouldRenderedItems);
   };
 

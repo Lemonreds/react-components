@@ -1,24 +1,12 @@
-import { useState, useEffect } from 'React';
+import { useState, useEffect } from 'react';
 import useBoolean from './useBoolean';
+import { shallowEquals } from './utils';
 
 const defaultPagination = { pageNum: 1, pageSize: 10 };
 
-// @cbd/utils
-const shallowEquals = (obj1, obj2) => {
-  if (obj1 == null || obj2 == null) {
-    if (obj1 == null && obj2 == null) return true;
-    return false;
-  }
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-  if (keys1.length === keys2.length) {
-    for (let i = 0; i < keys1.length; i += 1) {
-      const key = keys1[i];
-      if (obj1[key] !== obj2[key]) return false;
-    }
-    return true;
-  }
-  return false;
+const handleResp = (resp) => {
+  const { errCode, totalCount, data /** ...rest */ } = resp;
+  return errCode === 0 ? { totalCount, data } : { totalCount: 0, data: [] };
 };
 
 /**
@@ -40,10 +28,9 @@ const useTable = (services, initQuery = undefined, initialPagination = defaultPa
     setTrue();
     services({ ...pagination, ...query })
       .then((resp) => {
-        if (resp.errCode === 0) {
-          setTotal(resp.totalCount);
-          setData(resp.data);
-        }
+        const results = handleResp(resp);
+        setTotal(results.totalCount);
+        setData(results.data);
       })
       .finally(setFalse);
   };

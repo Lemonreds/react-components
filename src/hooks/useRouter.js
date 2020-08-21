@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
-
-// the export as `react-router-dom` > v5
-import { useParams, useLocation, useHistory, useRouteMatch } from 'umi';
+import { useParams, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import { parse } from 'query-string';
 
 /**
@@ -13,7 +11,7 @@ import { parse } from 'query-string';
 function useRouter() {
   const history = useHistory();
   const location = useLocation();
-  const params = useParams(); //   /:topic  { topic: "react" }
+  const params = useParams();
   const match = useRouteMatch();
 
   const { pathname } = location;

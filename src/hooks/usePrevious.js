@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'React';
+import { useRef, useEffect } from 'react';
 
 /**
  * @hook usePrevious
