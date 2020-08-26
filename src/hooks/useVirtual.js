@@ -1,26 +1,17 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { isFunction } from './utils';
 
-// generate a unique key.
-// let id = 0x996;
-// const uid = () => {
-//   id += 1;
-//   return id;
-// };
-
 const overflowCount = 5;
 
 /**
- *
  * @hook useVirtual
  * @desc 虚拟长列表
  * @at 2020/08/12
  * @by lmh
- * @ref https://hooks.umijs.org/hooks/ui/use-virtual-list 的又一个实现
- *
+ * @ref https://hooks.umijs.org/hooks/ui/use-virtual-list 的类似实现
  * */
 
-const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
+const useVirtual = ({ total = 0, height = 320, itemHeight = 32, useHeightCache = false }) => {
   const ref = useRef(null);
   const [list, setList] = useState([]);
 
@@ -28,8 +19,8 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
     generate();
   }, []);
 
-  const [cache, warpperHeight] = useMemo(() => {
-    const c = new Map(); // use map as itemHeight's caches
+  const [cache, wrapperHeight] = useMemo(() => {
+    const c = useHeightCache ? new Map() : null; // use a map as itemHeight's caches
 
     if (isFunction(itemHeight)) {
       let h = 0;
@@ -41,22 +32,21 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
     return [c, total * itemHeight];
   }, [total, itemHeight]);
 
-  const containerProps = {
-    ref,
-    onScroll: (e) => {
-      generate();
-      e.preventDefault();
-    },
-    style: { position: 'relative', overflow: 'auto', height },
-  };
-  const wrapperProps = { style: { overflow: 'hidden', height: warpperHeight } };
-
   const getItemHeight = (index) => {
-    if (!isFunction(itemHeight)) return itemHeight;
-    const cacheHeight = cache.get(index);
-    if (cacheHeight) return cacheHeight;
-    const iHeight = itemHeight(index);
-    cache.set(index, iHeight);
+    if (!isFunction(itemHeight)) {
+      return itemHeight;
+    }
+
+    let iHeight;
+    if (useHeightCache) {
+      iHeight = cache.get(index);
+      return iHeight;
+    }
+
+    iHeight = itemHeight(index);
+    if (useHeightCache) {
+      cache.set(index, iHeight);
+    }
     return iHeight;
   };
 
@@ -65,13 +55,14 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
       current: { scrollTop },
     } = ref;
 
-    if (!isFunction(itemHeight)) return Math.ceil(scrollTop / itemHeight);
+    if (!isFunction(itemHeight)) {
+      return Math.ceil(scrollTop / itemHeight);
+    }
 
     let startIndex = 0;
     let totalHeight = 0;
     while (totalHeight < scrollTop) {
-      const currentHeight = getItemHeight(startIndex);
-      totalHeight += currentHeight;
+      totalHeight += getItemHeight(startIndex);
       startIndex += 1;
     }
     return startIndex;
@@ -81,35 +72,45 @@ const useVirtual = ({ total = 0, height = 320, itemHeight = 32 }) => {
     const {
       current: { scrollTop },
     } = ref;
-
     const startIndex = getStartIndex();
-    const shouldRenderedItems = [];
+    const temp = [];
 
-    let renderedHeight = 0;
+    let totalHeight = 0;
     let index = startIndex;
     let startOverflowCount = overflowCount;
 
-    while (index <= total - 1 && (renderedHeight < height || startOverflowCount > 0)) {
-      const itemHeightValue = getItemHeight(index);
-      renderedHeight += itemHeightValue;
-      shouldRenderedItems.push({
+    while (index <= total - 1 && (totalHeight < height || startOverflowCount > 0)) {
+      const iHeight = getItemHeight(index);
+      totalHeight += iHeight;
+
+      temp.push({
         style: {
           position: 'absolute',
           width: '100%',
-          height: itemHeightValue,
-          top: `${scrollTop + renderedHeight - itemHeightValue}px`,
+          height: iHeight,
+          top: `${scrollTop + totalHeight - iHeight}px`,
         },
         index,
       });
       index += 1;
 
-      if (renderedHeight > height) {
+      if (totalHeight > height) {
         startOverflowCount -= 1;
       }
     }
 
-    setList(shouldRenderedItems);
+    setList(temp);
   };
+
+  const containerProps = {
+    ref,
+    onScroll: (e) => {
+      generate();
+      e.preventDefault();
+    },
+    style: { position: 'relative', overflow: 'auto', height },
+  };
+  const wrapperProps = { style: { overflow: 'hidden', height: wrapperHeight } };
 
   return [list, containerProps, wrapperProps];
 };

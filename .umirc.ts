@@ -10,6 +10,9 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  // UMI BUG
+  // 使用base后，umi的热加载会无效
+
   // publicPath: '/react-components/',
   // base:'/react-components/',
   // outputPath: '/react-components/',
@@ -20,5 +23,6 @@ export default defineConfig({
     examples: resolve('src/examples'),
     utils: resolve('src/utils'),
     hooks: resolve('src/hooks'),
+    tools: resolve('src/tools'),
   },
 });

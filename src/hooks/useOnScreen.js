@@ -1,36 +1,32 @@
 import { useEffect, useState } from 'react';
 
-const noop = () => undefined;
 const isSupportObserver = !!window.IntersectionObserver;
-const instances = new Map(); // use a  map to save callback and target
+const instances = new Map(); // use a  map to storage callback and target
 
-const getObserver = () =>
-  isSupportObserver
-    ? new window.IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const { isIntersecting, intersectionRatio, target } = entry;
-          if (isIntersecting && intersectionRatio > 0) {
-            // dom in view
-            const instance = instances.get(target);
-            // excute callback
-            if (instance) {
-              const { callback } = instance;
-              callback(target);
-            }
-            // unobserve, trigger once
-            observer.unobserve(target);
+const observer = isSupportObserver
+  ? new window.IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const { isIntersecting, intersectionRatio, target } = entry;
+        if (isIntersecting && intersectionRatio > 0) {
+          // dom in view
+          const instance = instances.get(target);
+          // excute callback
+          if (instance) {
+            const { callback } = instance;
+            callback(target);
           }
-        });
-      },
-      {
-        root: null, // use html as observer
-        //   rootMargin: '50px 25px 50px 25px', // preload
-      }
-    )
-    : { observe: noop, unobserve: noop }; // useless here.
-
-const observer = getObserver();
+          // unobserve, trigger once
+          observer.unobserve(target);
+        }
+      });
+    },
+    {
+      root: null, // use html as observer
+      //   rootMargin: '50px 25px 50px 25px', // preload
+    }
+  )
+  : null;
 
 const observe = (ele, callback) => {
   observer.observe(ele);

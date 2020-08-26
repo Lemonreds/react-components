@@ -8,32 +8,47 @@ const menus = [
     value: '/comp',
   },
   {
-    label: 'hook',
+    label: 'Hook',
     value: '/hook',
+  },
+  {
+    label: 'Tool',
+    value: '/tool',
   },
 ];
 
 class Layout extends React.Component {
+  
+  componentDidUpdate(prevProps) {
+    const { location } = this.props;
+    if (location !== prevProps.location) {
+      window.scrollTo(0, 0);
+    }
+  }
+
   render() {
     const { children } = this.props;
     return (
       <div className={styles.root}>
         <nav className={styles.navbar}>
           <div className={styles.links}>
-            {menus.map(({ label, value }) => (
-              <Link
-                to={value}
-                key={value}
-                // className={location.href.includes(value) ? styles.active : ''}
-              >
-                {label}
-              </Link>
-            ))}
+            {menus.map(({ label, value }) => {
+              return (
+                <Link
+                  to={value}
+                  key={value}
+                  className={location.href.includes(value) ? styles.active : ''}
+                >
+                  {label}
+                  {/* </span> */}
+                </Link>
+              );
+            })}
             <a
               target=" _blank"
               href="https://github.com/Lemonreds/react-components"
             >
-              github
+              Github
             </a>
           </div>
         </nav>
