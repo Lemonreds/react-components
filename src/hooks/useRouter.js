@@ -5,7 +5,7 @@ import { parse } from 'query-string';
 /**
  *
  * @hook useRouter
- * @desc react-router-dom 路由相关的 hook，类似 umi2/router 的封装。
+ * @desc react-router-dom 路由相关的 hook 整合
  *
  * */
 function useRouter() {

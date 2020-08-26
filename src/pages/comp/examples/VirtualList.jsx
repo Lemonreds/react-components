@@ -28,15 +28,17 @@ export default () => {
     <Wrapper label="VirtualList" time="2020-06-26">
       <VirtualList
         total={996}
-        unitHeight={90}
-        height={400}
+        unitHeight={45}
+        height={380}
         itemRender={itemRender}
         loadMore={null}
         hasMore={false}
         loading={false}
       />
       <Description>
-        无限虚拟滚动列表，支持滑倒底部加载更多 ,仅支持列表项目高度一致的长列表，高度不一致可以使用react-virtualized.
+        无限虚拟滚动列表，支持滑倒底部加载更多
+        ,仅支持列表项目高度一致的长列表，hook/useVirtual
+        实现了不定高度的子项长列表。
       </Description>
     </Wrapper>
   );

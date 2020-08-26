@@ -52,14 +52,17 @@ class Chart extends React.Component {
           return (
             <div
               style={{
-                color: '#000',
-                padding: '16px',
+                padding: '0 12px',
+                height: '38px',
+                lineHeight: '38px',
                 border: '1px solid #eee',
                 borderRadius: '5px',
+                color: '#fff',
+                background: '#004aff',
               }}
             >
               {params.name}
-              - 
+              
               {params.value}
             </div>
           );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer.jsx';
 import styles from './styles.less';
 
 const menus = [
@@ -18,7 +19,6 @@ const menus = [
 ];
 
 class Layout extends React.Component {
-  
   componentDidUpdate(prevProps) {
     const { location } = this.props;
     if (location !== prevProps.location) {
@@ -53,6 +53,8 @@ class Layout extends React.Component {
           </div>
         </nav>
         <div className={styles.content}>{children}</div>
+
+        <Footer />
       </div>
     );
   }

@@ -1,118 +1,139 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-import { isFunction } from './utils';
+import { isFunction, isNumber } from './utils';
 
-const overflowCount = 5;
+// 长列表上下边界的渲染数，一般不用修改
+// 主要是为了避免每次滚动都从整项开始
+const overscan = 4;
 
 /**
  * @hook useVirtual
- * @desc 虚拟长列表
+ * @desc 虚拟长列表，仅展示可视区域内的DOM
  * @at 2020/08/12
  * @by lmh
- * @ref https://hooks.umijs.org/hooks/ui/use-virtual-list 的类似实现
+ * @ref https://bvaughn.github.io/react-virtualized/#/components/List
  * */
 
-const useVirtual = ({ total = 0, height = 320, itemHeight = 32, useHeightCache = false }) => {
+const useVirtual = ({
+  total = 0, // 长列表的子项数目
+  height = 320, // 长列表的可视高度
+  itemHeight = 32, // 长列表的子项高度，为函数时表示高度可变的
+  useCache = false, // 缓存子项距离顶部的高度，但是感觉效果不明显，默认关闭了
+}) => {
   const ref = useRef(null);
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    generate();
+    reCalculate();
   }, []);
 
-  const [cache, wrapperHeight] = useMemo(() => {
-    const c = useHeightCache ? new Map() : null; // use a map as itemHeight's caches
-
-    if (isFunction(itemHeight)) {
-      let h = 0;
-      for (let i = 0; i < total; i += 1) {
-        h += itemHeight(i);
-      }
-      return [c, h];
+  // 获取长列表的滚动高度
+  const getTotalHeight = () => {
+    if (isNumber(itemHeight)) return total * itemHeight;
+    let h = 0;
+    for (let i = 0; i < total; i += 1) {
+      h += itemHeight(i);
     }
-    return [c, total * itemHeight];
-  }, [total, itemHeight]);
-
-  const getItemHeight = (index) => {
-    if (!isFunction(itemHeight)) {
-      return itemHeight;
-    }
-
-    let iHeight;
-    if (useHeightCache) {
-      iHeight = cache.get(index);
-      return iHeight;
-    }
-
-    iHeight = itemHeight(index);
-    if (useHeightCache) {
-      cache.set(index, iHeight);
-    }
-    return iHeight;
+    return h;
   };
+  // 获取某个子项的高度
+  const getItemHeight = index =>
+    isFunction(itemHeight) ? itemHeight(index) : itemHeight;
 
-  const getStartIndex = () => {
-    const {
-      current: { scrollTop },
-    } = ref;
+  const [offsetTopCaches, wrapperHeight] = useMemo(
+    () => [new Map(), getTotalHeight()],
+    [total, itemHeight],
+  );
 
-    if (!isFunction(itemHeight)) {
+  // 获取可视区域内，第一个子项
+  const getStart = scrollTop => {
+    if (isNumber(itemHeight)) {
       return Math.ceil(scrollTop / itemHeight);
     }
-
-    let startIndex = 0;
+    let start = 0;
     let totalHeight = 0;
     while (totalHeight < scrollTop) {
-      totalHeight += getItemHeight(startIndex);
-      startIndex += 1;
+      totalHeight += getItemHeight(start);
+      start += 1;
     }
-    return startIndex;
+    return start;
   };
 
-  const generate = () => {
-    const {
-      current: { scrollTop },
-    } = ref;
-    const startIndex = getStartIndex();
-    const temp = [];
-
+  // 获取可视区域内，最后一个子项
+  const getEnd = (start, clientHeight) => {
     let totalHeight = 0;
-    let index = startIndex;
-    let startOverflowCount = overflowCount;
+    let end = start;
+    while (totalHeight < clientHeight) {
+      totalHeight += getItemHeight(start);
+      end += 1;
+    }
+    return end;
+  };
 
-    while (index <= total - 1 && (totalHeight < height || startOverflowCount > 0)) {
-      const iHeight = getItemHeight(index);
-      totalHeight += iHeight;
+  // 获取某个子项，距离滚动容器的顶部的距离
+  // 子项高度可变的情况，用了map做缓存
+  const getOffsetTop = index => {
+    if (isNumber(itemHeight)) {
+      return index * itemHeight;
+    }
 
-      temp.push({
+    if (useCache) {
+      const cache = offsetTopCaches.get(index);
+      if (cache) {
+        return cache;
+      }
+    }
+
+    let h = 0;
+    for (let i = 0; i < index; i += 1) {
+      h += getItemHeight(i);
+    }
+    if (useCache) {
+      offsetTopCaches.set(index, h);
+    }
+    return h;
+  };
+
+  // 获取真实的子项渲染范围
+  const getRanges = started => {
+    const {
+      current: { scrollTop, clientHeight },
+    } = ref;
+    let start = started || getStart(scrollTop);
+    let end = getEnd(start, clientHeight);
+    start = start - overscan < 0 ? 0 : start - overscan;
+    end = end + overscan > total ? total : end + overscan;
+    return { start, end };
+  };
+
+  // 计算应该展示的子项
+  const reCalculate = started => {
+    const { start, end } = getRanges(started);
+    const t = [];
+    for (let i = start; i < end; i += 1) {
+      t.push({
         style: {
           position: 'absolute',
           width: '100%',
-          height: iHeight,
-          top: `${scrollTop + totalHeight - iHeight}px`,
+          height: getItemHeight(i),
+          top: `${getOffsetTop(i)}px`,
         },
-        index,
+        index: i,
       });
-      index += 1;
-
-      if (totalHeight > height) {
-        startOverflowCount -= 1;
-      }
     }
-
-    setList(temp);
+    setList(t);
   };
 
   const containerProps = {
     ref,
-    onScroll: (e) => {
-      generate();
+    onScroll: e => {
+      reCalculate();
       e.preventDefault();
     },
     style: { position: 'relative', overflow: 'auto', height },
   };
   const wrapperProps = { style: { overflow: 'hidden', height: wrapperHeight } };
 
-  return [list, containerProps, wrapperProps];
+  return [list, containerProps, wrapperProps, scrollTo];
 };
 
 export default useVirtual;

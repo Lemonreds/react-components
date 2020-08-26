@@ -3,10 +3,9 @@ import STATUS from '../Unit/status';
 class BarModel {
   constructor(length) {
     this.length = length;
-    this.current = 0;
-    this.bars = new Array(length).fill(STATUS.INIT);
-    // this.bars = new Array(length).fill(STATUS.COMPLETE);
-
+    this.current = length - 1;
+    // this.bars = new Array(length).fill(STATUS.INIT);
+    this.bars = new Array(length).fill(STATUS.COMPLETE);
     this.isPause = false;
   }
 
@@ -28,7 +27,6 @@ class BarModel {
   update = (index, status) => {
     this.current = index;
     this.bars[index] = status;
-    // console.log(`update ${index}`, status);
   };
 
   doRun = () => {

@@ -9,7 +9,11 @@ export default () => {
 
   return (
     <Wrapper label="useOnScreen" time="2020-08-21">
-      <div ref={ref}>{visible ? '你看见我了' : '没有 你还没没看见'}</div>
+      <div ref={ref}>
+        {visible
+          ? '  这一段文字会出现在触发 IntersectionObserver 事件的时候。'
+          : '没有 你还没没看见'}
+      </div>
 
       <Description>
         useOnScreen，当组件进入可视区域时候触发，可用于图片和组件的懒加载。

@@ -25,12 +25,10 @@ const onChanges = entries => {
 
 const instances = new Map(); // a map to save callback and target
 
-// TODO:
 // 这里统一了配置，用html做监听
-//
 const observer = new IntersectionObserver(onChanges, {
   root: null, // use document as observer
-  rootMargin: '50px 25px 50px 25px', // preload
+  // rootMargin: '50px 25px 50px 25px', // preload
 });
 
 const observe = (ele, callback) => {

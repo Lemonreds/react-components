@@ -17,7 +17,6 @@ export const shallowEquals = (obj1, obj2) => {
 
 export const depsEquals = (deps1, deps2) => {
   if (deps1 === deps2) return true;
-  // length must be equal
   for (const index in deps1) {
     if (deps1[index] !== deps2[index]) return false;
   }
@@ -25,3 +24,5 @@ export const depsEquals = (deps1, deps2) => {
 };
 
 export const isFunction = fn => fn instanceof Function;
+
+export const isNumber = n => typeof n === 'number';

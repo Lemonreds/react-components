@@ -5,23 +5,16 @@ import styles from './styles.less';
 
 const overflowItems = 4;
 
-class VList extends Component {
+class VirtualList extends Component {
   state = { offset: 0, inBottom: false };
 
   ref = React.createRef();
 
   componentDidUpdate(preProps, preState) {
-    const { loading } = this.props;
     const { inBottom } = this.state;
     if (!equal(inBottom, preState.inBottom)) {
       if (inBottom) {
         this.onMore();
-      }
-    }
-
-    if (!equal(loading, preProps.loading)) {
-      if (loading) {
-        this.slideToBottom();
       }
     }
   }
@@ -88,21 +81,6 @@ class VList extends Component {
     }
   };
 
-  slideToBottom = () => {
-    const { current } = this.ref;
-    if (current) {
-      const { scrollHeight } = current;
-      current.scrollTop = scrollHeight;
-    }
-  };
-
-  slideToTop = () => {
-    const { current } = this.ref;
-    if (current) {
-      current.scrollTop = 0;
-    }
-  };
-
   render() {
     const { height, unitHeight, total } = this.props;
 
@@ -121,7 +99,7 @@ class VList extends Component {
   }
 }
 
-VList.propTypes = {
+VirtualList.propTypes = {
   itemRender: PropTypes.func,
   unitHeight: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
@@ -132,7 +110,7 @@ VList.propTypes = {
   loading: PropTypes.bool,
 };
 
-VList.defaultProps = {
+VirtualList.defaultProps = {
   itemRender: ({ index }) => index,
   total: 0,
   threshold: 50,
@@ -141,4 +119,4 @@ VList.defaultProps = {
   loading: false,
 };
 
-export default VList;
+export default VirtualList;
