@@ -47,7 +47,7 @@ const useInfiniteScroller = ({
         throw new Error('`ref.current` is null.');
       }
     }
-  }, []);
+  });
 
   const containerProps = {
     ref,
