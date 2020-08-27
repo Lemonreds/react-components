@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useLayoutEffect, useCallback } from 'react';
 
 const tuning = 10;
 
@@ -18,7 +18,18 @@ const useInfiniteScroller = ({
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const onScroll = () => {
+  useLayoutEffect(() => {
+    if (loading) {
+      // support loader on bottom
+      // fix scrollerBar to bottom
+      setTimeout(() => {
+        const { current } = ref;
+        current.scrollTop = current.scrollHeight;
+      });
+    }
+  }, [loading]);
+
+  const onScroll = useCallback(() => {
     if (hasMore && !loading) {
       if (ref?.current) {
         const { scrollTop, scrollHeight, clientHeight } = ref.current;
@@ -34,7 +45,7 @@ const useInfiniteScroller = ({
         throw new Error('`ref.current` is null.');
       }
     }
-  };
+  },[]);
 
   const containerProps = {
     ref,

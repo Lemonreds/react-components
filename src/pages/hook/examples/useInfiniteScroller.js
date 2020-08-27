@@ -18,7 +18,7 @@ export default () => {
       setMockList([...mockList, {}, {}, {}]);
       setLoading(false);
       setHasMore(true);
-    }, 800);
+    }, 1800);
   };
 
   const [
@@ -31,7 +31,6 @@ export default () => {
 
   return (
     <Wrapper label="useInfiniteScroller" time="2020-08-26">
-      <p>{loading ? '加载中...' : '加载完成'}</p>
       <div {...containerProps}>
         {mockList.map((_, index) => (
           <div
@@ -48,6 +47,7 @@ export default () => {
             {index + 1}
           </div>
         ))}
+        {loading ? <p>加载中...</p> : null}
       </div>
 
       <Description>

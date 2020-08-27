@@ -11,7 +11,7 @@ export default defineConfig({
     type: 'none',
   },
   // UMI BUG
-  // 使用base后，umi的热加载会无效
+  // 使用base后，umi的热更新会无效
 
   // publicPath: '/react-components/',
   // base:'/react-components/',
