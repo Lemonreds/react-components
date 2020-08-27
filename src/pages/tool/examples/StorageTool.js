@@ -6,7 +6,7 @@ import StorageTool from 'tools/StorageTool';
 export default () => {
   StorageTool.set('test', 1996);
   StorageTool.setItem('test2', { name: 'jam', age: 12, skill: ['fe'] });
-  StorageTool.set('test3', '666');
+  StorageTool.set('test3', '123456');
   StorageTool.remove('test3');
 
   const str = `

@@ -39,6 +39,7 @@ const useVirtual = ({
   const getItemHeight = index =>
     isFunction(itemHeight) ? itemHeight(index) : itemHeight;
 
+  // 子项距离滚动区域顶部的距离、滚动区域的真实高度
   const [offsetTopCaches, wrapperHeight] = useMemo(
     () => [new Map(), getTotalHeight()],
     [total, itemHeight],
@@ -69,8 +70,8 @@ const useVirtual = ({
     return end;
   };
 
-  // 获取某个子项，距离滚动容器的顶部的距离
-  // 子项高度可变的情况，用了map做缓存
+  // 获取某个子项距离滚动容器的顶部的距离
+  // 子项高度可变的情况，用了map做缓存， useCache 开启
   const getOffsetTop = index => {
     if (isNumber(itemHeight)) {
       return index * itemHeight;
@@ -94,20 +95,21 @@ const useVirtual = ({
   };
 
   // 获取真实的子项渲染范围
-  const getRanges = started => {
+  const getRanges = () => {
     const {
       current: { scrollTop, clientHeight },
     } = ref;
-    let start = started || getStart(scrollTop);
+    let start = getStart(scrollTop);
     let end = getEnd(start, clientHeight);
+    // 非法值修正
     start = start - overscan < 0 ? 0 : start - overscan;
     end = end + overscan > total ? total : end + overscan;
     return { start, end };
   };
 
   // 计算应该展示的子项
-  const reCalculate = started => {
-    const { start, end } = getRanges(started);
+  const reCalculate = () => {
+    const { start, end } = getRanges();
     const t = [];
     for (let i = start; i < end; i += 1) {
       t.push({
@@ -133,7 +135,7 @@ const useVirtual = ({
   };
   const wrapperProps = { style: { overflow: 'hidden', height: wrapperHeight } };
 
-  return [list, containerProps, wrapperProps, scrollTo];
+  return [list, containerProps, wrapperProps];
 };
 
 export default useVirtual;

@@ -22,7 +22,7 @@ StorageTool.prototype = {
       const value = item ? JSON.parse(item) : defaultValue;
       return value;
     } catch (err) {
-      return defaultValue || '';
+      return defaultValue || undefined;
     }
   },
   remove(key) {

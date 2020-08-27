@@ -24,7 +24,9 @@ const useInfiniteScroller = ({
       // fix scrollerBar to bottom
       setTimeout(() => {
         const { current } = ref;
-        current.scrollTop = current.scrollHeight;
+        if (current.scrollTop !== current.scrollHeight) {
+          current.scrollTop = current.scrollHeight;
+        }
       });
     }
   }, [loading]);
@@ -45,7 +47,7 @@ const useInfiniteScroller = ({
         throw new Error('`ref.current` is null.');
       }
     }
-  },[]);
+  }, []);
 
   const containerProps = {
     ref,
