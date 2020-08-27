@@ -11,11 +11,11 @@ const delay = (callback, timeout) =>
   });
 
 export default () => {
-  const [mockList, setMockList] = useState([{}, {}, {}, {}, {}, {}, {}]);
+  const [mockList, setMockList] = useState([]);
   const loadMore = () => {
     setLoading(true);
     delay(() => {
-      setMockList([...mockList, {}, {}, {}]);
+      setMockList([...mockList, {}, {}, {}, {}, {}, {}, {}]);
       setLoading(false);
       setHasMore(true);
     }, 1800);
@@ -27,6 +27,7 @@ export default () => {
   ] = useInfiniteScroller({
     loadMore,
     height: 280,
+    initLoadMore: true,
   });
 
   return (
@@ -51,7 +52,7 @@ export default () => {
       </div>
 
       <Description>
-        useInfiniteScroller，列表无限加载组件，滚动到底部后加载新数据。
+        useInfiniteScroller，列表无限加载组件，滚动到底部后加载新数据。列表底部可以增加loader，loading时自动定位到底部展示loader组件。
       </Description>
     </Wrapper>
   );

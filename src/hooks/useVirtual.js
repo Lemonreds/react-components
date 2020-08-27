@@ -71,7 +71,7 @@ const useVirtual = ({
   };
 
   // 获取某个子项距离滚动容器的顶部的距离
-  // 子项高度可变的情况，用了map做缓存， useCache 开启
+  // 子项高度可变的情况，用了map做缓存，useCache=true开启 
   const getOffsetTop = index => {
     if (isNumber(itemHeight)) {
       return index * itemHeight;

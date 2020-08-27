@@ -10,12 +10,12 @@ export default () => {
   const [list1, containerProps1, wrapperProps1] = useVirtual({
     total: 9996,
     height: 280,
-    itemHeight: 36,
+    itemHeight: 54,
   });
   const [list, containerProps, wrapperProps] = useVirtual({
     total: 9996,
     height: 280,
-    itemHeight: i => (i % 2 === 0 ? 58 : 32),
+    itemHeight: i => (i % 2 === 0 ? 86 :54),
   });
   return (
     <Wrapper label="useVirtual" time="2020-08-21">
@@ -61,7 +61,9 @@ export default () => {
         </div>
       </div>
 
-      <Description>useVirtual，无限长列表，支持子项不定高度。</Description>
+      <Description>
+        useVirtual，无限长列表，支持子项不定高度，解决列表数据量过大，DOM渲染过多的卡顿问题。
+      </Description>
     </Wrapper>
   );
 };

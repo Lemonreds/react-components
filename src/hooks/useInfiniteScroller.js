@@ -1,4 +1,10 @@
-import { useState, useRef, useLayoutEffect, useCallback } from 'react';
+import {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+} from 'react';
 
 const tuning = 10;
 
@@ -12,16 +18,25 @@ const useInfiniteScroller = ({
   threshold = 0,
   loadMore = null,
   height = undefined,
+  initLoadMore = false, //  是否触发第一页的数据加载
 }) => {
   const ref = useRef(null);
   const inBottom = useRef(false);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (initLoadMore) {
+      if (loadMore instanceof Function) {
+        loadMore();
+      }
+    }
+  }, []);
+
   useLayoutEffect(() => {
     if (loading) {
       // support loader on bottom
-      // fix scrollerBar to bottom
+      // auto fix scrollerBar to bottom when invoke loading.
       setTimeout(() => {
         const { current } = ref;
         if (current.scrollTop !== current.scrollHeight) {

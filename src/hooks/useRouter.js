@@ -1,5 +1,10 @@
 import { useMemo } from 'react';
-import { useParams, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
+import {
+  useParams,
+  useLocation,
+  useHistory,
+  useRouteMatch,
+} from 'react-router-dom';
 import { parse } from 'query-string';
 
 /**
@@ -15,7 +20,7 @@ function useRouter() {
   const match = useRouteMatch();
 
   const { pathname } = location;
-  const { push, replace, goBack, search } = history;
+  const { push, replace, goBack, go, search } = history;
 
   // example:: /:topic?sort=popular -> { topic: "react", sort: "popular" }
   const query = { ...parse(search), ...params };
@@ -26,13 +31,14 @@ function useRouter() {
       push,
       replace,
       goBack,
+      go,
       pathname,
       query,
       match,
       location,
       history,
     }),
-    [params, match, location, history]
+    [params, match, location, history],
   );
 }
 

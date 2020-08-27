@@ -16,7 +16,7 @@ export default () => {
       </div>
 
       <Description>
-        useOnScreen，当组件进入可视区域时候触发，可用于图片和组件的懒加载。
+        useOnScreen，当组件进入可视区域时候触发（仅触发一次），可用于图片和组件的懒加载。
       </Description>
     </Wrapper>
   );
