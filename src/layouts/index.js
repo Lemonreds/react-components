@@ -40,7 +40,6 @@ class Layout extends React.Component {
                   className={location.href.includes(value) ? styles.active : ''}
                 >
                   {label}
-                  {/* </span> */}
                 </Link>
               );
             })}

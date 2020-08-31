@@ -17,7 +17,7 @@ const useVirtual = ({
   total = 0, // 长列表的子项数目
   height = 320, // 长列表的可视高度
   itemHeight = 32, // 长列表的子项高度，为函数时表示高度可变的
-  useCache = false, // 缓存子项距离顶部的高度，但是感觉效果不明显，默认关闭了
+  cacheable = false, // 缓存子项距离顶部的高度，但是感觉效果不明显，默认关闭了
 }) => {
   const ref = useRef(null);
   const [list, setList] = useState([]);
@@ -71,13 +71,13 @@ const useVirtual = ({
   };
 
   // 获取某个子项距离滚动容器的顶部的距离
-  // 子项高度可变的情况，用了map做缓存，useCache=true开启 
+  // 子项高度可变的情况，用了map做缓存，cacheable=true开启 
   const getOffsetTop = index => {
     if (isNumber(itemHeight)) {
       return index * itemHeight;
     }
 
-    if (useCache) {
+    if (cacheable) {
       const cache = offsetTopCaches.get(index);
       if (cache) {
         return cache;
@@ -88,7 +88,7 @@ const useVirtual = ({
     for (let i = 0; i < index; i += 1) {
       h += getItemHeight(i);
     }
-    if (useCache) {
+    if (cacheable) {
       offsetTopCaches.set(index, h);
     }
     return h;
