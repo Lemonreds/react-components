@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-import { isFunction, isNumber } from './utils';
+import { isNumber } from './utils';
 
 // 长列表上下边界的渲染数，一般不用修改
 // 主要是为了避免每次滚动都从整项开始
@@ -37,7 +37,7 @@ const useVirtual = ({
   };
   // 获取某个子项的高度
   const getItemHeight = index =>
-    isFunction(itemHeight) ? itemHeight(index) : itemHeight;
+    isNumber(itemHeight) ? itemHeight : itemHeight(index);
 
   // 子项距离滚动区域顶部的距离、滚动区域的真实高度
   const [offsetTopCaches, wrapperHeight] = useMemo(
@@ -64,14 +64,14 @@ const useVirtual = ({
     let totalHeight = 0;
     let end = start;
     while (totalHeight < clientHeight) {
-      totalHeight += getItemHeight(start);
+      totalHeight += getItemHeight(end);
       end += 1;
     }
     return end;
   };
 
   // 获取某个子项距离滚动容器的顶部的距离
-  // 子项高度可变的情况，用了map做缓存，cacheable=true开启 
+  // 子项高度可变的情况，用了map做缓存，cacheable=true开启
   const getOffsetTop = index => {
     if (isNumber(itemHeight)) {
       return index * itemHeight;

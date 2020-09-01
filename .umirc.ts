@@ -10,6 +10,9 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  target: {
+    ie: '11',
+  },
   // UMI BUG
   // 使用base后，umi的热更新会无效
 
@@ -25,4 +28,27 @@ export default defineConfig({
     hooks: resolve('src/hooks'),
     tools: resolve('src/tools'),
   },
+  // dynamicImport:{},
+  // chainWebpack: function(config, { webpack }) {
+  //   config.merge({
+  //     optimization: {
+  //       minimize: true,
+  //       splitChunks: {
+  //         chunks: 'all',
+  //         minSize: 30000,
+  //         minChunks: 3,
+  //         automaticNameDelimiter: '.',
+  //         cacheGroups: {
+  //           vendor: {
+  //             name: 'vendor',
+  //             test({ resource }) {
+  //               return /[\\/]node_modules[\\/]/.test(resource);
+  //             },
+  //             priority: 20,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   });
+  // },
 });
