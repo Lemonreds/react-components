@@ -10,9 +10,6 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  target: {
-    ie: '11',
-  },
   // UMI BUG
   // 使用base后，umi的热更新会无效
 
