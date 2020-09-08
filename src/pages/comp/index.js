@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import HorizontalScroller from './examples/HorizontalScroller';
 import TimeLine from './examples/TimeLine';
 import Echarts from './examples/Echarts';
 import VirtualList from './examples/VirtualList';
@@ -9,6 +10,7 @@ import Lazyload from './examples/Lazyload';
 export default () => {
   return (
     <Container>
+      <HorizontalScroller />
       <TimeLine />
       <Echarts />
       <VirtualList />
