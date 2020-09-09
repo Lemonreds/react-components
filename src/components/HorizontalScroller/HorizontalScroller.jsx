@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { on } from 'utils';
 
 function HorizontalScroller({
   children,
@@ -15,17 +16,11 @@ function HorizontalScroller({
       if (onScroll instanceof Function) {
         onScroll(e, ref.current);
       }
+      // use passive
+      // ref: https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener
       e.preventDefault();
     };
-
-    ref.current.addEventListener('mousewheel', onXScroll, {
-      passive: false,
-    });
-    return () => {
-      ref.current.removeEventListener('mousewheel', onXScroll, {
-        passive: false,
-      });
-    };
+    return on(ref.current, 'mousewheel', onXScroll, { passive: false });
   }, []);
 
   return (

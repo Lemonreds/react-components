@@ -7,6 +7,7 @@ export default () => {
   return (
     <Wrapper label="HorizontalScroller" time="2020-09-08">
       <HorizontalScroller>
+        {/* <div style={{ overflowX: 'scroll' }}> */}
         <div
           style={{
             width: 3699,
@@ -30,10 +31,9 @@ export default () => {
           which can used in debug and with third party libraries such as Redux.
           It is called as useDebugValue to display a label for custom hooks.
         </div>
+        {/* </div> */}
       </HorizontalScroller>
-      <Description>
-        水平滚动容器，允许滑轮默认滚动Y轴禁用默认行为，改为滚动X轴。
-      </Description>
+      <Description>水平滚动容器，支持滑轮来操作X轴的滚动行为。</Description>
     </Wrapper>
   );
 };

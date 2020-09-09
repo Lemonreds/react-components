@@ -27,8 +27,3 @@ export const isFunction = fn => fn instanceof Function;
 
 export const isNumber = n => typeof n === 'number';
 
-export const on = (target, event, ...args) =>
-  target && target.addEventListener(event, ...args);
-
-export const off = (target, event, ...args) =>
-  target && target.removeEventListener(event, ...args);

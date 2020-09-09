@@ -50,17 +50,15 @@ const useInfiniteScroller = ({
     if (hasMore && !loading) {
       if (ref?.current) {
         const { scrollTop, scrollHeight, clientHeight } = ref.current;
+        const lastIsReachBottom = inBottom.current;
         const isReachBottom =
           scrollTop + clientHeight >= scrollHeight - threshold - tuning;
-        if (isReachBottom && !inBottom.current) {
-          if (loadMore instanceof Function) {
-            loadMore();
-          }
+
+        if (isReachBottom && !lastIsReachBottom) {
+          if (loadMore instanceof Function) loadMore();
         }
         inBottom.current = isReachBottom;
-      } else {
-        throw new Error('`ref.current` is null.');
-      }
+      } else throw new Error('`ref.current` is null.');
     }
   });
 

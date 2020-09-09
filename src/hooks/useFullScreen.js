@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { on, off } from './utils';
+import { on } from 'utils';
 
 // ref: https://github.com/sindresorhus/screenfull.js/blob/master/src/screenfull.js
 const fs = [
@@ -71,10 +71,11 @@ const useFullScreen = ref => {
   };
 
   useEffect(() => {
+    let off = null;
     if (ref.current) {
-      on(document, `${m.fullscreenchange}`, onChange);
+      off = on(document, `${m.fullscreenchange}`, onChange);
     }
-    return () => off(document, `${m.fullscreenchange}`, onChange);
+    return off;
   }, [ref.current]);
 
   const request = () => ref.current[m.requestFullscreen]();

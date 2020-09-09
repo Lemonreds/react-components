@@ -5,7 +5,7 @@ import styles from './styles.less';
 
 const menus = [
   {
-    label: 'Components',
+    label: 'Component',
     value: '/comp',
   },
   {
