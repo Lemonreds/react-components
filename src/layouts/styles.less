@@ -6,18 +6,23 @@
     top: 0;
     left: 0;
     right: 0;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
+    padding: 0 64px;
     height: 64px;
     width: 100%;
+    box-sizing: border-box;
     white-space: nowrap;
     background: #fff;
     box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    .title {
+      color: rgb(210, 54, 105);
+      font-size: 16px;
+      font-weight: 600;
+      font-family: Montserrat, sans-serif;
+    }
     .links {
       display: flex;
       > a {
@@ -34,13 +39,13 @@
         letter-spacing: 0;
         transition: color 0.18s ease-in-out;
         &:hover {
-          color: #4569d4;
+          color: rgb(210, 54, 105);
         }
       }
     }
     .active {
-      color: #4569d4 !important;
-      border-bottom: 2px solid #4569d4;
+      color: rgb(210, 54, 105) !important;
+      border-bottom: 2px solid rgb(210, 54, 105);
     }
   }
 }

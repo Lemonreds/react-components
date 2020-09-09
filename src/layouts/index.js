@@ -31,6 +31,7 @@ class Layout extends React.Component {
     return (
       <div className={styles.root}>
         <nav className={styles.navbar}>
+          <h3 className={styles.title}>ReactComponents</h3>
           <div className={styles.links}>
             {menus.map(({ label, value }) => {
               return (
