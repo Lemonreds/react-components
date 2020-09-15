@@ -10,12 +10,19 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  plugins: ['./umi-plugin-config-routes'],
+  // umi-plugin-config-routes的自定义配置
+  configRoutes: {
+    strict: true,
+    exclude: /examples|tests/,
+  },
+
   // UMI BUG
   // 使用base后，umi的热更新会无效
-
   // publicPath: '/react-components/',
-  // base:'/react-components/',
+  // base: '/react-components/',
   // outputPath: '/react-components/',
+
   alias: {
     pages: resolve('src/pages'),
     components: resolve('src/components'),
@@ -25,7 +32,9 @@ export default defineConfig({
     hooks: resolve('src/hooks'),
     tools: resolve('src/tools'),
   },
-  // dynamicImport:{},
+  dynamicImport: {
+    loading: '@/Loading',
+  },
   // chainWebpack: function(config, { webpack }) {
   //   config.merge({
   //     optimization: {

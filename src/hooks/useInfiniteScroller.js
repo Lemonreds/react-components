@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
 } from 'react';
+import { isFunction } from './utils';
 
 const tuning = 10;
 
@@ -26,10 +27,8 @@ const useInfiniteScroller = ({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (initLoadMore) {
-      if (loadMore instanceof Function) {
-        loadMore();
-      }
+    if (initLoadMore && isFunction(loadMore)) {
+      loadMore();
     }
   }, []);
 
@@ -55,7 +54,7 @@ const useInfiniteScroller = ({
           scrollTop + clientHeight >= scrollHeight - threshold - tuning;
 
         if (isReachBottom && !lastIsReachBottom) {
-          if (loadMore instanceof Function) loadMore();
+          if (isFunction(loadMore)) loadMore();
         }
         inBottom.current = isReachBottom;
       } else throw new Error('`ref.current` is null.');
