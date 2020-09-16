@@ -5,7 +5,7 @@ import { IApi, IRoute } from 'umi';
 // @ref: https://umijs.org/zh-CN/plugins/api
 
 const defaultOptions = { strict: true, exclude: null };
-const strictRegex = /(layout|index)(.js|.jsx|.ts|.tsx)$/;
+const strictRegex = /(layout|index|404)(.js|.jsx|.ts|.tsx)$/;
 
 /**
  * @plugin umi-plugin-config-routes
