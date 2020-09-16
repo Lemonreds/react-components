@@ -1,11 +1,12 @@
 const path = require('path');
 
 import { defineConfig } from 'umi';
-// maybe used in SPA
+// useless in SPA
 // import htmlCriticalWebpackPlugin from 'html-critical-webpack-plugin';
 
 const isProd = process.env.NODE_ENV === 'production';
 const basePath = isProd ? '/react-components/' : '/';
+const outputPath = isProd ? '/react-components/' : '/dist';
 
 const resolve = function(dir: string) {
   return path.resolve(__dirname, dir);
@@ -13,7 +14,7 @@ const resolve = function(dir: string) {
 
 export default defineConfig({
   nodeModulesTransform: { type: 'none' },
-  plugins: ['./umi-plugin-config-routes','./umi-plugin-404'],
+  plugins: ['./umi-plugin-config-routes', './umi-plugin-404'],
   // umi-plugin-config-routes的自定义配置
   configRoutes: {
     strict: true, // 强匹配，路由只匹配文件名有 index|layout|404 的文件
@@ -28,7 +29,7 @@ export default defineConfig({
   // base不是'/'的情况下，umi的热更新会无效
   publicPath: basePath,
   base: basePath,
-  outputPath: basePath,
+  outputPath,
 
   dynamicImport: {
     loading: '@/Loading',
