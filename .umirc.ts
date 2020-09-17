@@ -36,6 +36,8 @@ export default defineConfig({
   },
   chainWebpack: function(config, { webpack }) {
     if (isProd) {
+      // production 模式下
+      // 按照路由分片打包，提取公用的vendor
       config.merge({
         optimization: {
           minimize: true,
@@ -57,23 +59,8 @@ export default defineConfig({
         },
       });
     }
-    // config.plugin('critical').use(htmlCriticalWebpackPlugin, [
-    //   {
-    //     base: path.join(path.resolve(__dirname), 'dist/'),
-    //     src: 'index.html',
-    //     dest: 'index.html',
-    //     inline: true,
-    //     minify: true,
-    //     extract: true,
-    //     // iphone6
-    //     width: 375,
-    //     height: 565,
-    //     penthouse: {
-    //       blockJSRequests: false,
-    //     },
-    //   },
-    // ]);
   },
+  // 配置别名
   alias: {
     pages: resolve('src/pages'),
     components: resolve('src/components'),

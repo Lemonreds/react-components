@@ -1,0 +1,49 @@
+@placeholder-color: #eee;
+@transiton-time: 0.3s;
+@line-height: 1px;
+
+.container {
+  margin: 12px 0;
+  position: relative;
+  .input {
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    z-index: 3;
+    border-bottom: @line-height solid @placeholder-color;
+    &::placeholder {
+      opacity: 0;
+    }
+    &:focus,//# input focus的情况下
+      &:not(:placeholder-shown) {
+      // # input的placeholder不显示的时候
+      border-bottom-color: transparent;
+      ~ .line {
+        // # ~表示后面的 line 兄弟节点
+        width: 100%;
+      }
+
+      ~ .label {
+        color: gray;
+        transform: translateY(-28px) scale(0.95);
+      }
+    }
+  }
+  .line {
+    width: 0;
+    height: @line-height;
+    background: #d23669;
+    transition: width @transiton-time ease-in-out;
+  }
+  .label {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    font-size: 15px;
+    color: gray;
+    transition: all @transiton-time ease-in-out;
+    z-index: 2;
+  }
+}

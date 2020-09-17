@@ -1,0 +1,41 @@
+.root {
+  .container {
+    width: 46px;
+    height: 26px;
+    border: 0 solid #eee;
+    border-radius: 255px;
+    cursor: pointer;
+    position: relative;
+    will-change: background;
+    transition: background 0.2s ease-in-out;
+    .slider {
+      position: absolute;
+      display: inline-block;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 255px;
+      border: 1px solid transparent;
+      background-color: #fff;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 2px 4px 0 rgba(0, 35, 11, 0.2);
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+  }
+  .on {
+    background-color: #d23669;
+    & > .slider {
+      left: calc(46px - 20px - 2px - 2px);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  .off {
+    background-color: rgba(0, 0, 0, 0.15);
+    & > .slider {
+      left: 2px;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

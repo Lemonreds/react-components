@@ -25,7 +25,7 @@ export default () => {
         )}
       </Tabs>
       <Description>
-        Tabs组件，基于CSSwhite-space: nowrap; 实现。
+        Tabs组件，关键CSS是 white-space: nowrap; 实现，小程序端的自定义Navigation-Bar也可以用此方法实现。
       </Description>
     </Wrapper>
   );

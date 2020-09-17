@@ -17,7 +17,7 @@ const Loading = () => (
       justifyContent: 'center',
     }}
   >
-    Dynamic Import Loading.... :)
+    正在加载.... :)
   </div>
 );
 

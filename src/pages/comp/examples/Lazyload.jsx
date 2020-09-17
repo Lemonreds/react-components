@@ -17,7 +17,7 @@ export default () => {
       </Lazyload>
 
       <Lazyload width="100%" height={256}>
-        <img src={image} alt="lazyload-image" width={660} height={366} />
+        <img src={image} alt="lazyload" width={660} height={366} />
       </Lazyload>
 
       <Observer>
@@ -44,7 +44,8 @@ export default () => {
       </Observer>
 
       <Description>
-        基于浏览器API IntersectionObserver的Lazyload组件，可用于懒加载图片。
+        基于浏览器API
+        IntersectionObserver的Lazyload组件，可用于懒加载图片、视频以及其他组件。
       </Description>
     </Wrapper>
   );
