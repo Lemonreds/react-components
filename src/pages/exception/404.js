@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 
-export default function(props) {
+export default function() {
   return (
     <div
       style={{
@@ -10,17 +10,17 @@ export default function(props) {
         position: 'fixed',
         left: 0,
         top: 0,
-        background: '#fff',
+        background: 'var(--bg)',
         zIndex: '999',
-        color: '#d23669',
+        color: 'var(--primary)',
         fontSize: '18px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      404 :)
-      <a href="/comp">to ComponentPage</a>
+      404，咩都无啦~ :)
+      <a href="/comp">【穿梭回去】</a>
     </div>
   );
 }

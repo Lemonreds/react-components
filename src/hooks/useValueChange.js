@@ -20,8 +20,6 @@ function useValueChange(props) {
     if (typeof value !== 'undefined') {
       if (onChange instanceof Function) {
         onChange(v);
-      } else {
-        set(v);
       }
     } else {
       set(v);

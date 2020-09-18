@@ -1,5 +1,5 @@
-@placeholder-color: #eee;
-@transiton-time: 0.3s;
+@placeholder-color: rgba(0, 0, 0, 0.54);
+@transiton-time: 0.2s;
 @line-height: 1px;
 
 .container {
@@ -9,7 +9,7 @@
     outline: none;
     border: none;
     width: 100%;
-    padding: 10px 0;
+    padding: 10px 6px;
     font-size: 16px;
     z-index: 3;
     border-bottom: @line-height solid @placeholder-color;
@@ -19,10 +19,18 @@
     &:focus,//# input focus的情况下
       &:not(:placeholder-shown) {
       // # input的placeholder不显示的时候
-      border-bottom-color: transparent;
-      ~ .line {
-        // # ~表示后面的 line 兄弟节点
-        width: 100%;
+      &:not(.bordered) {
+        border-bottom-color: transparent;
+        ~ .line {
+          // # ~表示后面的 line 兄弟节点
+          // width: 100%;
+          &::before {
+            width: 50%;
+          }
+          &::after {
+            width: 50%;
+          }
+        }
       }
 
       ~ .label {
@@ -32,18 +40,51 @@
     }
   }
   .line {
-    width: 0;
+    width: 100%;
     height: @line-height;
-    background: #d23669;
+    // background: #d23669;
+    background: transparent;
     transition: width @transiton-time ease-in-out;
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      right: 50%;
+      width: 0;
+      height: @line-height;
+      background: #d23669;
+      transition: width @transiton-time ease-in-out;
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: @line-height;
+      background: #d23669;
+      transition: width @transiton-time ease-in-out;
+    }
   }
   .label {
     position: absolute;
-    left: 0;
+    left: 6px;
     bottom: 10px;
     font-size: 15px;
     color: gray;
     transition: all @transiton-time ease-in-out;
     z-index: 2;
+  }
+  .bordered {
+    border-radius: 2px;
+    border: @line-height solid @placeholder-color;
+    &:focus {
+      border: @line-height solid #d23669;
+    }
+    transition: color @transiton-time ease-in-out;
+    ~ .label {
+      background: #fff;
+    }
   }
 }

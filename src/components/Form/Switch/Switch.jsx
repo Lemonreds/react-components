@@ -5,13 +5,14 @@ import styles from './Switch.less';
 
 function Switch(props) {
   const [value, setValue] = useValueChange(props);
+  const { style } = props;
 
   const toggle = () => {
     setValue(!value);
   };
 
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={style}>
       <div
         onClick={toggle}
         className={cn(styles.container, value ? styles.on : styles.off)}
