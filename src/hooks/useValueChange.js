@@ -8,18 +8,23 @@ import { useState, useEffect } from 'react';
  */
 function useValueChange(props) {
   const { defaultValue, onChange, value } = props;
-  const [state, set] = useState(defaultValue || '');
+  const [state, set] = useState(value || defaultValue);
 
   useEffect(() => {
     if (value !== state) {
-      setter(value);
+      set(value);
     }
   }, [value]);
 
   const setter = v => {
-    set(v);
-    if (onChange instanceof Function) {
-      onChange(v);
+    if (typeof value !== 'undefined') {
+      if (onChange instanceof Function) {
+        onChange(v);
+      } else {
+        set(v);
+      }
+    } else {
+      set(v);
     }
   };
 

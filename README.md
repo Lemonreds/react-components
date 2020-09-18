@@ -1,12 +1,18 @@
 ### React-Components
 
-一个存储React组件/Hook等相关的仓库。
+记录React开发中积累的组件、Hook，以及UMI、Webpack相关。
 
+### LIVE
+
+https://lemonreds.github.io/react-components/
 
 ### 本地运行
 
-1. npm install
+1. npm run install
 
-2. npm start
+2. npm run start
 
-3. npm build
+### 打包
+
+1. npm run build
+

@@ -18,3 +18,7 @@ export function removeClassName(el, className) {
     );
   }
 }
+
+export function clearClassName(el) {
+  el.className = '';
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Footer from './Footer.jsx';
+import Footer from './Footer';
+import Themes from './Themes';
 import styles from './styles.less';
 
 const menus = [
@@ -55,6 +56,7 @@ class Layout extends React.Component {
         <div className={styles.content}>{children}</div>
 
         <Footer />
+        <Themes />
       </div>
     );
   }

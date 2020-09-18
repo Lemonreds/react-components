@@ -1,7 +1,7 @@
 const path = require('path');
 
 import { defineConfig } from 'umi';
-// useless in SPA
+// (critical.js) useless in SPA
 // import htmlCriticalWebpackPlugin from 'html-critical-webpack-plugin';
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -62,7 +62,9 @@ export default defineConfig({
   },
   // 配置别名
   alias: {
+    src: resolve('src'),
     pages: resolve('src/pages'),
+    models: resolve('src/models'),
     components: resolve('src/components'),
     assets: resolve('src/assets'),
     examples: resolve('src/examples'),

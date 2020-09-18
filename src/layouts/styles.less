@@ -1,3 +1,5 @@
+@import '~src/theme.less';
+
 .root {
   padding-top: 64px;
   .navbar {
@@ -11,14 +13,14 @@
     width: 100%;
     box-sizing: border-box;
     white-space: nowrap;
-    background: #fff;
+    background: var(--bg);
     box-shadow: 0 8px 24px -2px rgba(0, 0, 0, 0.05);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     .title {
-      color: rgb(210, 54, 105);
+      color: var(--primary);
       font-size: 16px;
       font-weight: 600;
       font-family: Montserrat, sans-serif;
@@ -31,7 +33,7 @@
         margin: 0 40px;
         display: inline-block;
         text-align: center;
-        color: #4d5164;
+        color: var(--nav);
         font-size: 14px;
         font-weight: 600;
         line-height: 64px;
@@ -39,13 +41,13 @@
         letter-spacing: 0;
         transition: color 0.18s ease-in-out;
         &:hover {
-          color: rgb(210, 54, 105);
+          color: var(--primary);
         }
       }
     }
     .active {
-      color: rgb(210, 54, 105) !important;
-      border-bottom: 2px solid rgb(210, 54, 105);
+      color: var(--primary) !important;
+      border-bottom: 2px solid var(--primary);
     }
   }
 }
@@ -53,8 +55,14 @@
 //
 // make global.
 //
-
 body {
   margin: 0 !important;
   font-family: 'Merriweather', 'Georgia', serif;
+}
+:global {
+  #root {
+    background: var(--bg);
+    transition: color 0.3s ease-out;
+    min-height: 100vh;
+  }
 }
