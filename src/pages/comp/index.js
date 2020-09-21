@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import Captha from './examples/Captha';
 import Form from './examples/Form';
 import HorizontalScroller from './examples/HorizontalScroller';
 import TimeLine from './examples/TimeLine';
@@ -11,6 +12,7 @@ import Lazyload from './examples/Lazyload';
 export default () => {
   return (
     <Container>
+      <Captha />
       <Form />
       <HorizontalScroller />
       <TimeLine />

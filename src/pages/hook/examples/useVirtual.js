@@ -1,6 +1,7 @@
 import React from 'react';
 import Space from 'components/Space';
 import Wrapper from 'components/Wrapper';
+import Part from 'components/Part';
 import Description from 'components/Description';
 import useVirtual from 'hooks/useVirtual';
 
@@ -15,11 +16,11 @@ export default () => {
   const [list, containerProps, wrapperProps] = useVirtual({
     total: 9996,
     height: 280,
-    itemHeight: i => (i % 2 === 0 ? 86 :54),
+    itemHeight: i => (i % 2 === 0 ? 86 : 54),
   });
   return (
     <Wrapper label="useVirtual" time="2020-08-21">
-      <p>Item 定高</p>
+      <Part>Item 定高</Part>
       <div {...containerProps1}>
         <div {...wrapperProps1}>
           {list1.map(({ style, index }) => (
@@ -40,7 +41,7 @@ export default () => {
         </div>
       </div>
       <Space />
-      <p>Item 不定高</p>
+      <Part>Item 不定高</Part>
       <div {...containerProps}>
         <div {...wrapperProps}>
           {list.map(({ style, index }) => (

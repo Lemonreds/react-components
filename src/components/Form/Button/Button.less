@@ -1,0 +1,48 @@
+.root {
+  display: block;
+  width: 64px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+  outline: 0;
+  padding: 0;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  transition: 0.3s;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+  background: rgb(210, 54, 105);
+  border: none;
+  border-radius: 0px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 4px;
+  .ripple {
+    display: inline-block;
+    z-index: 1;
+    .unit {
+      display: inline-block;
+      content: '';
+      position: absolute;
+      width: 100%;
+      border-radius: 50%;
+      padding-top: 100%;
+      transform: translate(-50%, -50%);
+      animation: ripple 0.45s 1 0ms;
+    }
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(0, 0, 0, 0.45);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.68);
+    background: transparent;
+  }
+}

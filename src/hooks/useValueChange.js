@@ -17,12 +17,11 @@ function useValueChange(props) {
   }, [value]);
 
   const setter = v => {
-    if (typeof value !== 'undefined') {
-      if (onChange instanceof Function) {
-        onChange(v);
-      }
-    } else {
+    if (typeof value === 'undefined') {
       set(v);
+    }
+    if (onChange instanceof Function) {
+      onChange(v);
     }
   };
 
