@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { on } from 'utils';
+import { on } from 'utils/dom';
 
 function HorizontalScroller({
   children,

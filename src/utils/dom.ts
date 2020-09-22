@@ -8,6 +8,15 @@ export function addClassName(el, className) {
   }
 }
 
+export function getEventPosition(container = document.body, event) {
+  const rect = container.getBoundingClientRect();
+  const position = {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
+  return position;
+}
+
 export function removeClassName(el, className) {
   if (el.classList) {
     el.classList.remove(className);
@@ -22,3 +31,9 @@ export function removeClassName(el, className) {
 export function clearClassName(el) {
   el.className = '';
 }
+
+export const on = (target, event, ...args) =>
+  target.addEventListener(event, ...args);
+
+export const off = (target, event, ...args) =>
+  target.removeEventListener(event, ...args);

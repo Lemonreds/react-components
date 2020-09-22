@@ -9,17 +9,15 @@ import VirtualList from './examples/VirtualList';
 import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
 
-export default () => {
-  return (
-    <Container>
-      <Captha />
-      <Form />
-      <HorizontalScroller />
-      <TimeLine />
-      <Echarts />
-      <VirtualList />
-      <Tabs />
-      <Lazyload />
-    </Container>
-  );
-};
+const Comps = [
+  Captha,
+  Form,
+  HorizontalScroller,
+  TimeLine,
+  Echarts,
+  VirtualList,
+  Tabs,
+  Lazyload,
+];
+
+export default () => <Container comps={Comps} />;

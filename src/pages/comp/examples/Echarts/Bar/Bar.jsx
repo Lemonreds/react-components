@@ -55,7 +55,7 @@ class Chart extends React.Component {
                 padding: '0 12px',
                 height: '38px',
                 lineHeight: '38px',
-                border: '1px solid #eee',
+                // border: '1px solid #eee',
                 borderRadius: '5px',
                 color: '#fff',
                 background: '#004aff',

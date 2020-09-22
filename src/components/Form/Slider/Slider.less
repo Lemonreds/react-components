@@ -1,0 +1,50 @@
+@slider-width: 244px;
+@slider-height: 6px;
+
+@hanlder-width: 16px;
+@hanlder-height: 16px;
+
+.root {
+  width: @slider-width;
+  border-radius: 4px;
+  position: relative;
+  user-select: none;
+
+  &:active,
+  &:hover {
+    .hanlder {
+      border-color: rgb(210, 54, 105);
+    }
+    .active {
+      background: rgb(210, 54, 105);
+    }
+  }
+
+  .hanlder {
+    position: absolute;
+    top: 5px;
+    width: @hanlder-width;
+    height: @hanlder-height;
+    border: 2px solid rgb(96, 94, 92);
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .active {
+    display: inline-block;
+    width: 0;
+    height: @slider-height;
+    background: rgb(96, 94, 92);
+  }
+  .inactive {
+    display: inline-block;
+    width: 0;
+    height: @slider-height;
+    background: rgb(237, 235, 233);
+  }
+  .state {
+    position: absolute;
+    right: -48px;
+  }
+}

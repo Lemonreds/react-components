@@ -5,10 +5,22 @@ import Part from 'components/Part';
 import Input from 'components/Form/Input';
 import Switch from 'components/Form/Switch';
 import Button from 'components/Form/Button';
+import Slider from 'components/Form/Slider';
 
 export default () => {
   return (
     <Wrapper label="Form" time="-">
+      <Part>滑动条</Part>
+      <p style={{ margin: '16px 0' }}>有初始值，且最小步长为10</p>
+      <Slider min={0} max={100} defaultValue={20} step={10} />
+      <p style={{ margin: '16px 0' }}>有初始值，不设置步长</p>
+      <Slider min={100} max={168} defaultValue={110} />
+      <p style={{ margin: '16px 0' }}>完全受控，不允许修改</p>
+      <Slider min={0} max={200} value={86} />
+      <Description>
+        [2020-09-22]
+        滑动条，基于mousemove、mouseup、onMouseDown等事件实现的拖拽，支持设置范围，步长，点击等
+      </Description>
       <Part>按钮</Part>
       <Button>提交</Button>
       <Description>

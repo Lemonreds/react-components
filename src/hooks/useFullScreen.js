@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { on } from 'utils';
+import { on } from 'utils/dom';
 
 // ref: https://github.com/sindresorhus/screenfull.js/blob/master/src/screenfull.js
 const fs = [
