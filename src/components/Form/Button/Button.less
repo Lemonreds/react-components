@@ -1,5 +1,4 @@
 .root {
-  display: block;
   width: 64px;
   height: 36px;
   line-height: 36px;
@@ -39,7 +38,7 @@
 @keyframes ripple {
   from {
     transform: translate(-50%, -50%) scale(0);
-    background: rgba(0, 0, 0, 0.45);
+    background: var(--ripple-color, rgba(0, 0, 0, 0.45));
   }
   to {
     transform: translate(-50%, -50%) scale(1.68);

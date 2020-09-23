@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './Button.less';
 
 // 根据鼠标事件以及容器计算偏移位置
@@ -22,9 +22,18 @@ const addRippleDom = (e, containerDom, targetDom) => {
   return h;
 };
 
-function Button({ children, onClick }) {
+const varname = '--ripple-color';
+
+function Button({ children, style, onClick, rippleColor }) {
   const container = useRef(null);
   const target = useRef(null);
+
+  useEffect(() => {
+    if (rippleColor) {
+      const dom = container.current;
+      dom.style.setProperty(varname, rippleColor);
+    }
+  }, []);
 
   const onButtonClick = e => {
     addRippleDom(e, container.current, target.current);
@@ -39,6 +48,7 @@ function Button({ children, onClick }) {
       className={styles.root}
       type="button"
       onClick={onButtonClick}
+      style={style}
     >
       <span className={styles.children}>{children}</span>
       <span className={styles.ripple} ref={target} />

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { off, on, getEventPosition } from 'utils/dom';
+import { off, on } from 'utils/dom';
 import useMount from './useMount';
 
 /**
@@ -8,9 +8,16 @@ import useMount from './useMount';
  * @at 2020/09/22
  * @by lmh
  * */
+
+// 拖拽的初始位置
+const initPosition = { x: 0, y: 0 };
+// 默认的配置，默认允许拖拽元素溢出容器
+const defaultOptions = { overbound: true };
+
 const useDraggable = (
-  container = document.body,
-  { onMouseDown, onMouseUp, onMouseMove },
+  container, // 容器，可以是ref.current|dom| 拖拽元素的父元素（默认）
+  { onMouseDown, onMouseUp, onMouseMove }, // calllback
+  { overbound } = defaultOptions, // 是否支持拖拽溢出容器，默认是允许，
 ) => {
   const isDragging = useRef(null);
   const ref = useRef(null);
@@ -19,8 +26,23 @@ const useDraggable = (
     const mouseMove = e => {
       if (isDragging.current) {
         if (onMouseMove) {
-          const position = getEventPosition(container?.current ?? container, e);
-          onMouseMove(position);
+          // ref.current | dom | 拖拽元素的父元素
+          const roots =
+            container?.current ?? container ?? ref.current.parentNode;
+
+          let x = e.clientX - initPosition.x;
+          let y = e.clientY - initPosition.y;
+
+          // 是否允许 拖拽位置脱离边界
+          if (!overbound) {
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            const { clientWidth: pWidth, clientHeight: pHeight } = roots;
+            const { clientWidth: cWidth, clientHeight: cHeight } = ref.current;
+            if (x + cWidth > pWidth) x = pWidth - cWidth;
+            if (y + cHeight > pHeight) y = pHeight - cHeight;
+          }
+          onMouseMove({ x, y });
         }
       }
     };
@@ -41,6 +63,12 @@ const useDraggable = (
     ref,
     onMouseDown: e => {
       isDragging.current = true;
+      const target = e.target || e.srcElement;
+      // offsetLeft 返回与最近定位的元素（或者body）的左边缘距离
+      // clientX 鼠标事件点击的x轴位置
+      initPosition.x = e.clientX - target.offsetLeft;
+      initPosition.y = e.clientY - target.offsetTop;
+
       if (onMouseDown) onMouseDown(e);
     },
   };

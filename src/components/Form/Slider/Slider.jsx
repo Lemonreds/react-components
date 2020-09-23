@@ -9,21 +9,19 @@ const isControllered = value => typeof value !== 'undefined';
 const getCloseValue = (min, max, percent, step) => {
   const value = parseInt((max - min) * percent) + min;
   if (isNum(step)) {
-    // const maxSteps = Math.floor((max - min) / step);
     const steps = (value - min) / step;
     const closeValue = Math.round(steps) * step;
-    return closeValue;
+    return closeValue + min;
   }
   return value;
 };
 
 function Slider({ min, max, defaultValue, value, step, onChange }) {
   const container = useRef(null);
-
   // 让组件受控
   // 有value的props，直接用value，不用内部的state
   // 交由父组件控制
-  const [state, setState] = useState(defaultValue || value || 0);
+  const [state, setState] = useState(defaultValue || value || min || 0);
   useEffect(() => {
     if (onChange) {
       onChange(state);
@@ -39,7 +37,7 @@ function Slider({ min, max, defaultValue, value, step, onChange }) {
   }, [value]);
   // end
 
-  const updateOffset = position => {
+  const onMouseMove = position => {
     const { clientWidth } = container.current;
     const { x } = position;
     let p = x / clientWidth;
@@ -49,9 +47,9 @@ function Slider({ min, max, defaultValue, value, step, onChange }) {
     setState(v);
   };
 
-  const [props] = useDraggable(container, { onMouseMove: updateOffset });
+  const [props] = useDraggable(container, { onMouseMove });
 
-  const onTrack = e => updateOffset(getEventPosition(container.current, e));
+  const onTrack = e => onMouseMove(getEventPosition(container.current, e));
 
   // 让组件受控
   // 有value的props，直接用value，不用内部的state
