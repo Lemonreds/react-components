@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import Loading from './examples/Loading';
 import Captha from './examples/Captha';
 import Form from './examples/Form';
 import HorizontalScroller from './examples/HorizontalScroller';
@@ -18,6 +19,7 @@ const Comps = [
   VirtualList,
   Tabs,
   Lazyload,
+  Loading,
 ];
 
 export default () => <Container comps={Comps} />;

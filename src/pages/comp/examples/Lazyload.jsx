@@ -22,24 +22,26 @@ export default () => {
 
       <Observer>
         {inView => (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            // width="610"
-            height="256"
-            poster={posterImg}
-          >
-            <source
-              src={
-                inView
-                  ? 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
-                  : null
-              }
-              type="video/mp4"
-            />
-          </video>
+          <div style={{ width: '100%', height: '100%', textAlign: 'center' }}>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              // width="610"
+              height="256"
+              poster={posterImg}
+            >
+              <source
+                src={
+                  inView
+                    ? 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4'
+                    : null
+                }
+                type="video/mp4"
+              />
+            </video>
+          </div>
         )}
       </Observer>
 

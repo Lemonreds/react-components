@@ -1,6 +1,7 @@
 import React from 'react';
+import Loading from 'components/Loading';
 
-const Loading = () => (
+const LoadingPage = () => (
   <div
     style={{
       width: '100vw',
@@ -17,8 +18,8 @@ const Loading = () => (
       justifyContent: 'center',
     }}
   >
-    正在加载.... :)
+    <Loading />
   </div>
 );
 
-export default Loading;
+export default LoadingPage;
