@@ -16,7 +16,7 @@ const defaultOptions = { overbound: true };
 
 const useDraggable = (
   container, // 容器，可以是ref.current|dom| 拖拽元素的父元素（默认）
-  { onMouseDown, onMouseUp, onMouseMove }, // calllback
+  { onMouseDown, onMouseUp, onMouseMove }, // callback
   { overbound } = defaultOptions, // 是否支持拖拽溢出容器，默认是允许，
 ) => {
   const isDragging = useRef(null);

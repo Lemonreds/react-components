@@ -4,14 +4,19 @@ import Wrapper from 'components/Wrapper';
 import Description from 'components/Description';
 import useDraggable from 'hooks/useDraggable';
 import Links from 'components/Links';
+import Part from 'components/Part';
+import styles from './useDraggable.less';
 
 export default () => {
-  const ref = useRef(ref);
+  const ref = useRef(null);
+  const ref2 = useRef(null);
 
   const [label, set] = useState('Drag Element base');
   const [pos, setPos] = useState({ x: 20, y: 10 });
   const [pos2, setPos2] = useState({ x: 20, y: 100 });
   const [pos3, setPos3] = useState({ x: 280, y: 100 });
+
+  const [pos4, setPos4] = useState({ x: 100, y: 0 });
 
   const [props, isDragging] = useDraggable(
     ref,
@@ -38,8 +43,23 @@ export default () => {
     { overbound: true },
   );
 
+  const [props5] = useDraggable(
+    ref2,
+    {
+      onMouseMove: ({ x, y }) => {
+        let _x = x;
+        // 临界值控制
+        if (_x < 50) _x = 50;
+        if (_x > 500) _x = 500;
+        setPos4({ x: _x, y });
+      },
+    },
+    { overbound: false },
+  );
+
   return (
-    <Wrapper label="useDraggable" time="2020-09-23">
+    <Wrapper label="useDraggable" time="2020-09-23" className={styles.root}>
+      <Part>基础使用，是否允许拖拽DOM溢出容器</Part>
       <div
         ref={ref}
         style={{
@@ -106,6 +126,30 @@ export default () => {
           }}
         >
           DragEle 允许拖拽出容器
+        </div>
+      </div>
+      <Part>
+        两栏布局的伸缩控制，Left元素容器的宽度范围设置为 [50,500]，避免坍缩 
+      </Part>
+      <div ref={ref2} className={styles.e2container}>
+        <div
+          className={styles.e2left}
+          style={{
+            width: pos4.x,
+          }}
+        >
+          left
+          <div className={styles.handler} {...props5}>
+            》
+          </div>
+        </div>
+        <div
+          className={styles.e2right}
+          style={{
+            width: 550 - pos4.x,
+          }}
+        >
+          right
         </div>
       </div>
 
