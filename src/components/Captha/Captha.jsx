@@ -21,7 +21,7 @@ const getAngle = degree => (degree * Math.PI) / 180;
 
 // 获取 [start-end] 范围内的随机数
 const getRan = (start, end) =>
-  Math.floor(Math.random() * (end - start) + start);
+  Math.floor(Math.random() * (end - start + 1) + start);
 
 // 获取 colors 内的任意颜色
 const getRanColor = colors => colors[getRan(0, colors.length)];
@@ -79,7 +79,9 @@ const draw = (
 };
 
 const getRanCaptha = (count, datasets) =>
-  new Array(count).fill(null).map(() => datasets[getRan(0, datasets.length)]);
+  new Array(count)
+    .fill(null)
+    .map(() => datasets[getRan(0, datasets.length - 1)]);
 
 /**
  * @hook Captha

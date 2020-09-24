@@ -5,18 +5,15 @@ import Description from 'components/Description';
 import useDraggable from 'hooks/useDraggable';
 import Links from 'components/Links';
 import Part from 'components/Part';
-import styles from './useDraggable.less';
+import DraggleLayout from 'components/DraggleLayout';
 
 export default () => {
   const ref = useRef(null);
-  const ref2 = useRef(null);
 
   const [label, set] = useState('Drag Element base');
   const [pos, setPos] = useState({ x: 20, y: 10 });
   const [pos2, setPos2] = useState({ x: 20, y: 100 });
   const [pos3, setPos3] = useState({ x: 280, y: 100 });
-
-  const [pos4, setPos4] = useState({ x: 100, y: 0 });
 
   const [props, isDragging] = useDraggable(
     ref,
@@ -43,22 +40,8 @@ export default () => {
     { overbound: true },
   );
 
-  const [props5] = useDraggable(
-    ref2,
-    {
-      onMouseMove: ({ x, y }) => {
-        let _x = x;
-        // 临界值控制
-        if (_x < 50) _x = 50;
-        if (_x > 500) _x = 500;
-        setPos4({ x: _x, y });
-      },
-    },
-    { overbound: false },
-  );
-
   return (
-    <Wrapper label="useDraggable" time="2020-09-23" className={styles.root}>
+    <Wrapper label="useDraggable" time="2020-09-23">
       <Part>基础使用，是否允许拖拽DOM溢出容器</Part>
       <div
         ref={ref}
@@ -129,29 +112,49 @@ export default () => {
         </div>
       </div>
       <Part>
-        两栏布局的伸缩控制，Left元素容器的宽度范围设置为 [50,500]，避免坍缩 
+        两栏布局的伸缩控制，Left元素容器的宽度范围设置为 [50,500]，避免坍缩
       </Part>
-      <div ref={ref2} className={styles.e2container}>
+      <DraggleLayout
+        containerWidth={550}
+        containerHeight={220}
+        min={50}
+        max={500}
+        initLeftWidth={100}
+        handler={
+          <div
+            style={{
+              width: 4,
+              height: '100%',
+              background: 'rgb(77, 81, 100)',
+            }}
+          />
+        }
+      >
         <div
-          className={styles.e2left}
           style={{
-            width: pos4.x,
+            backgroundColor: `rgb(36, 205, 208)`,
+            color: `#fff`,
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           left
-          <div className={styles.handler} {...props5}>
-            》
-          </div>
         </div>
         <div
-          className={styles.e2right}
           style={{
-            width: 550 - pos4.x,
+            backgroundColor: `rgb(116, 140, 253)`,
+            color: `#fff`,
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           right
         </div>
-      </div>
+      </DraggleLayout>
 
       <Description>useDraggable，使容器内的DOM元素变得可拖拽。</Description>
     </Wrapper>

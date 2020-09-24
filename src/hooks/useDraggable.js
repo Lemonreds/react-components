@@ -14,6 +14,9 @@ const initPosition = { x: 0, y: 0 };
 // 默认的配置，默认允许拖拽元素溢出容器
 const defaultOptions = { overbound: true };
 
+// 当前触发mouseDown的元素，由于mouseUp 绑定在window
+let currentTarget = null;
+
 const useDraggable = (
   container, // 容器，可以是ref.current|dom| 拖拽元素的父元素（默认）
   { onMouseDown, onMouseUp, onMouseMove }, // callback
@@ -24,31 +27,38 @@ const useDraggable = (
 
   useMount(() => {
     const mouseMove = e => {
-      if (isDragging.current) {
-        if (onMouseMove) {
-          // ref.current | dom | 拖拽元素的父元素
-          const roots =
-            container?.current ?? container ?? ref.current.parentNode;
+      if (ref.current === currentTarget) {
+        if (isDragging.current) {
+          if (onMouseMove) {
+            // ref.current | dom | 拖拽元素的父元素
+            const roots =
+              container?.current ?? container ?? ref.current.parentNode;
 
-          let x = e.clientX - initPosition.x;
-          let y = e.clientY - initPosition.y;
+            let x = e.clientX - initPosition.x;
+            let y = e.clientY - initPosition.y;
 
-          // 是否允许 拖拽位置脱离边界
-          if (!overbound) {
-            if (x < 0) x = 0;
-            if (y < 0) y = 0;
-            const { clientWidth: pWidth, clientHeight: pHeight } = roots;
-            const { clientWidth: cWidth, clientHeight: cHeight } = ref.current;
-            if (x + cWidth > pWidth) x = pWidth - cWidth;
-            if (y + cHeight > pHeight) y = pHeight - cHeight;
+            // 是否允许 拖拽位置脱离边界
+            if (!overbound) {
+              if (x < 0) x = 0;
+              if (y < 0) y = 0;
+              const { clientWidth: pWidth, clientHeight: pHeight } = roots;
+              const {
+                clientWidth: cWidth,
+                clientHeight: cHeight,
+              } = ref.current;
+              if (x + cWidth > pWidth) x = pWidth - cWidth;
+              if (y + cHeight > pHeight) y = pHeight - cHeight;
+            }
+            onMouseMove({ x, y });
           }
-          onMouseMove({ x, y });
         }
       }
     };
     const mouseUp = e => {
-      isDragging.current = false;
-      if (onMouseUp) onMouseUp(e);
+      if (ref.current === currentTarget) {
+        isDragging.current = false;
+        if (onMouseUp) onMouseUp(e);
+      }
     };
 
     on(window, 'mousemove', mouseMove);
@@ -64,6 +74,9 @@ const useDraggable = (
     onMouseDown: e => {
       isDragging.current = true;
       const target = e.target || e.srcElement;
+      // 缓存此次触发事件的元素
+      currentTarget = target;
+
       // offsetLeft 返回与最近定位的元素（或者body）的左边缘距离
       // clientX 鼠标事件点击的x轴位置
       initPosition.x = e.clientX - target.offsetLeft;
