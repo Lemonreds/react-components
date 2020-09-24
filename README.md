@@ -10,10 +10,10 @@ https://lemonreds.github.io/react-components/
 
 * Captha 验证码组件 【2020-09-21】
 * Form 表单相关组件
-  - Slider 滑动条
-  - Button 水波纹按钮
-  - Input 输入框
-  - Swtich 开关
+  - Slider 滑动条 【2020-09-22】
+  - Button 水波纹按钮 【2020-09-21】
+  - Input 输入框 【2020-09-17】
+  - Swtich 开关 【2020-09-17】
 * HorizontalScroller 水平滚动容器 【2020-09-08】
 * TimeLine  时间线进度条组件 【2020-06-26】
 * Echarts e-charts容器以及一些配置图表
@@ -34,6 +34,11 @@ https://lemonreds.github.io/react-components/
 ## Other
 
 * CSSvariable  基于CSS变量的换肤 【2020-09-18】
+
+## UMI-PLUGIN
+
+* umi-plugin-404  为UMI3的约定式路由补上404路由 【2020-09-16】
+* umi-plugin-config-routes  为UMI的路由补上404路由，对UMI3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。【2020-09-15】
 
 ## 本地运行
 
