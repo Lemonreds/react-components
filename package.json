@@ -39,6 +39,7 @@
     "eslint-config-prettier": "^3.5.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint-plugin-react": "^7.12.4",
+    "lodash": "^4.17.20"
   }
 }

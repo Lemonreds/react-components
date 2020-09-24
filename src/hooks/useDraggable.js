@@ -13,8 +13,8 @@ import useMount from './useMount';
 const initPosition = { x: 0, y: 0 };
 // 默认的配置，默认允许拖拽元素溢出容器
 const defaultOptions = { overbound: true };
-
 // 当前触发mouseDown的元素，由于mouseUp 绑定在window
+// eventCallback 会触发到其他使用  useDraggable 的元素
 let currentTarget = null;
 
 const useDraggable = (

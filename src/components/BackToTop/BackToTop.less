@@ -1,0 +1,51 @@
+@keyframes leftIn {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes rightOut {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+
+.leftIn {
+  animation: leftIn 0.4s ease-in-out forwards;
+}
+
+.rightOut {
+  animation: rightOut 0.4s ease-in-out forwards;
+}
+
+.root {
+  background-color: #e6e6e6;
+  border: 1px solid #e0e0e0;
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  right: 33px;
+  bottom: 86px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+  transition: background 0.3s ease-in-out;
+}

@@ -20,7 +20,7 @@ function HorizontalScroller({
       // ref: https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener
       e.preventDefault();
     };
-    return on(ref.current, 'mousewheel', onXScroll, { passive: false });
+    return on(ref.current, 'mousewheel', onXScroll /** , { passive: false } */);
   }, []);
 
   return (

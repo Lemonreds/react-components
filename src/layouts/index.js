@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import BackToTop from 'components/BackToTop';
 import Footer from './Footer';
 import Themes from './Themes';
 import styles from './styles.less';
@@ -54,7 +55,7 @@ class Layout extends React.Component {
           </div>
         </nav>
         <div className={styles.content}>{children}</div>
-
+        <BackToTop />
         <Footer />
         <Themes />
       </div>
