@@ -35,6 +35,7 @@ export default defineConfig({
     loading: '@/Loading',
   },
   chainWebpack: function(config, { webpack }) {
+    // config.output.chunkFilename('[name].bundle.js');
     if (isProd) {
       // production 模式下
       // 按照路由分片打包，提取公用的vendor

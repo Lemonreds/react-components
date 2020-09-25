@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import createLoadable from './examples/createLoadable';
 import Loading from './examples/Loading';
 import Captha from './examples/Captha';
 import Form from './examples/Form';
@@ -11,6 +12,7 @@ import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
 
 const Comps = [
+  createLoadable,
   Captha,
   Form,
   HorizontalScroller,

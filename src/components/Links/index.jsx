@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Links = ({ href, text }) => (
+const Links = ({ href, text, children }) => (
   <a href={href} target="_blank" rel="noreferrer">
-    {text || href}
+    {text || children || href}
   </a>
 );
 
