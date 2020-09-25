@@ -8,7 +8,7 @@ https://lemonreds.github.io/react-components/
 
 ## Component
 
-* createLoadable 动态导入逻辑组件 【2020-09-25】
+* createLoadable 动态导入包装组件 【2020-09-25】
 * Captha 验证码组件 【2020-09-21】
 * Form 表单相关组件
   - Slider 滑动条 【2020-09-22】

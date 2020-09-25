@@ -49,7 +49,7 @@ export default () => {
 
       <Button
         onClick={onClick}
-        style={{ width: 220, margin: '24px auto', display: 'block' }}
+        style={{ width: 240, margin: '24px auto', display: 'block' }}
       >
         点我，延迟1.5s后开始加载异步组件。
       </Button>
