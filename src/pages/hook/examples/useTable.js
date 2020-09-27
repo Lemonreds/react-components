@@ -2,6 +2,7 @@ import React from 'react';
 import Wrapper from 'components/Wrapper';
 import Description from 'components/Description';
 import Space from 'components/Space';
+import Button from 'components/Form/Button';
 import useTable from 'hooks/useTable';
 import delay from 'utils/delay';
 
@@ -83,21 +84,16 @@ export default () => {
 
       <Space />
 
-      <button
-        onClick={onPrev}
-        type="submit"
-        disabled={pagination.pageNum - 1 === 0}
-      >
+      <Button onClick={onPrev} disabled={pagination.pageNum - 1 === 0}>
         上一页
-      </button>
-      <button
+      </Button>
+      <Button
         style={{ marginLeft: 24 }}
         onClick={onNext}
-        type="submit"
         disabled={pagination.pageNum + 1 > totalPage}
       >
         下一页
-      </button>
+      </Button>
       <Description>
         useTable，提取了Table组件的分页、请求、响应处理、加载状态逻辑，通过暴露的方法来修改分页、更改查询参数后重新发起请求。
         主要用于Antd Table组件的状态hook抽离。

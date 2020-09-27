@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import Accordion from './examples/Accordion';
 import createLoadable from './examples/createLoadable';
 import Loading from './examples/Loading';
 import Captha from './examples/Captha';
@@ -12,6 +13,7 @@ import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
 
 const Comps = [
+  Accordion,
   createLoadable,
   Captha,
   Form,

@@ -8,16 +8,17 @@ https://lemonreds.github.io/react-components/
 
 ## Component
 
-* createLoadable 动态导入包装组件 【2020-09-25】
+* Accordion 折叠面板 【2020-09-27】
+* createLoadable Webpack动态导入包装组件 【2020-09-25】
 * Captha 验证码组件 【2020-09-21】
 * Form 表单相关组件
   - Slider 滑动条 【2020-09-22】
   - Button 水波纹按钮 【2020-09-21】
   - Input 输入框 【2020-09-17】
-  - Swtich 开关 【2020-09-17】
+  - Switch 开关 【2020-09-17】
 * HorizontalScroller 水平滚动容器 【2020-09-08】
 * TimeLine  时间线进度条组件 【2020-06-26】
-* Echarts e-charts容器以及一些配置图表
+* Echarts E-charts的react容器以及一些配置图表
 * VirtualList 虚拟滚动列表 【2020-06-26】
 * Tabs 标签页 【2020-07-02】
 * Lazyload 懒加载组件 【2020-07-06】

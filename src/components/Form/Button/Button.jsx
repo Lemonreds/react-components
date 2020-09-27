@@ -24,7 +24,7 @@ const addRippleDom = (e, containerDom, targetDom) => {
 
 const varname = '--ripple-color';
 
-function Button({ children, style, onClick, rippleColor }) {
+function Button({ children, style, onClick, rippleColor ,...rest }) {
   const container = useRef(null);
   const target = useRef(null);
 
@@ -49,6 +49,7 @@ function Button({ children, style, onClick, rippleColor }) {
       type="button"
       onClick={onButtonClick}
       style={style}
+      {...rest}
     >
       <span className={styles.children}>{children}</span>
       <span className={styles.ripple} ref={target} />
