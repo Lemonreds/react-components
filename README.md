@@ -12,6 +12,7 @@ https://lemonreds.github.io/react-components/
 * createLoadable Webpack动态导入包装组件 【2020-09-25】
 * Captha 验证码组件 【2020-09-21】
 * Form 表单相关组件
+  - Form 基于rc-field-form的表单封装组件【2020-09-28】
   - Slider 滑动条 【2020-09-22】
   - Button 水波纹按钮 【2020-09-21】
   - Input 输入框 【2020-09-17】
