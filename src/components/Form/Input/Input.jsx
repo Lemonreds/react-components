@@ -6,7 +6,8 @@ import styles from './Input.less';
 function Input(props) {
   const ref = useRef();
   const [value, setValue] = useValueChange(props);
-  const { placeholder, style, bordered } = props;
+  
+  const { placeholder, style, bordered ,...rest} = props;
 
   const onChange = e => {
     setValue(e.target.value);
@@ -24,6 +25,7 @@ function Input(props) {
         value={value || ''}
         onChange={onChange}
         placeholder="placeholder"
+        {...rest}
       />
       {!bordered && <div className={styles.line} />}
       <div className={styles.label} onClick={toFocus}>

@@ -15,6 +15,8 @@ export default () => {
   const [pos2, setPos2] = useState({ x: 20, y: 100 });
   const [pos3, setPos3] = useState({ x: 280, y: 100 });
 
+  const [width, setWidth] = useState(50);
+
   const [props, isDragging] = useDraggable(
     ref,
     {
@@ -112,7 +114,10 @@ export default () => {
         </div>
       </div>
       <Part>
-        两栏布局的伸缩控制，Left元素容器的宽度范围设置为 [50,500]，避免坍缩
+        两栏布局的伸缩控制，Left元素容器的宽度范围设置为
+        [50,500]，避免坍缩，当前宽度[
+        {width}
+        px]
       </Part>
       <DraggleLayout
         containerWidth={550}
@@ -120,6 +125,7 @@ export default () => {
         min={50}
         max={500}
         initLeftWidth={100}
+        onWidthChange={w => setWidth(w)}
         handler={
           <div
             style={{

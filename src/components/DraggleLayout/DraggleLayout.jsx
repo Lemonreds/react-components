@@ -10,6 +10,7 @@ function DraggleLayout({
   containerHeight = 0, // 容器高度
   initLeftWidth = 0, // 初始左侧容器宽度
   handler = null, // 拖拽器
+  onWidthChange = width => width, // 左侧容器高度变化
 }) {
   const ref = useRef(null);
 
@@ -22,6 +23,7 @@ function DraggleLayout({
         let _x = x;
         if (_x < min) _x = min;
         if (_x > max) _x = max;
+        if (onWidthChange) onWidthChange(_x);
         setPosition({ x: _x, y });
       },
     },
@@ -43,10 +45,7 @@ function DraggleLayout({
     <div
       ref={ref}
       className={styles.root}
-      style={{
-        width: containerWidth,
-        height: containerHeight,
-      }}
+      style={{ width: containerWidth, height: containerHeight }}
     >
       <div className={styles.left} style={{ width: position.x }}>
         {children[0]}

@@ -39,8 +39,11 @@ export default () => {
     const DynamicTest = createLoadable({
         loader: () => import(/* webpackChunkName: "DynamicTest" */ './DynamicTest'),
         loading: Loading,
-        delay: 3000,
-    });`}
+        delay: 1500,
+    });
+    
+      {isClicked && <DynamicTest />}    
+    `}
       </pre>
 
       <div style={{ width: '100%', height: '100px', border: '1px solid #eee' }}>

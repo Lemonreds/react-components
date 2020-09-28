@@ -38,7 +38,7 @@ export default () => {
       </Accordion.Container>
       <Description>
         [2020-09-27] Accordion 折叠面板，主要基于CSS动画以及 visibility
-        属性实现。 属性实现
+        属性实现。
       </Description>
     </Wrapper>
   );

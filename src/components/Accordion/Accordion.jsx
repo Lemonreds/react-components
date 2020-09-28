@@ -4,6 +4,9 @@ import styles from './Accordion.less';
 
 const ifClassnames = (condition, classname) => (condition ? classname : null);
 
+// const durationTime = 200;
+const h = null;
+
 function Accordion({ title, index, children, onExpand, defaultExpand }) {
   const ref = useRef(null);
   const [expand, setExpand] = useState(defaultExpand);
@@ -12,6 +15,7 @@ function Accordion({ title, index, children, onExpand, defaultExpand }) {
   // 保存内容的实际高度
   useEffect(() => {
     setHeight(ref.current.clientHeight);
+    return () => clearTimeout(h);
   }, []);
 
   // 点击展开

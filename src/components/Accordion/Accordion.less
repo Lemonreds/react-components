@@ -6,24 +6,23 @@
   border: 1px solid rgba(0, 0, 0, 0.26);
   border-radius: 5px;
   background: #f2f4f5;
-  transition: margin var(--durationTime) ease-out;
+  transition: margin var(--durationTime) cubic-bezier(0.4, 0, 0.2, 1);
 
   .accordion {
     background: #fff;
     border-radius: 5px;
 
-    transition: margin var(--durationTime) ease-out;
+    transition: margin var(--durationTime) cubic-bezier(0.4, 0, 0.2, 1);
 
     .wrapper {
       padding: 12px 18px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.16);
       cursor: pointer;
-
       .title {
         margin: 0 auto;
         font-size: 16px;
         min-height: 26px;
-        transition: margin var(--durationTime) ease-out;
+        transition: margin var(--durationTime) cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
     &:last-child {
@@ -33,7 +32,7 @@
     }
     .content {
       min-height: 0;
-      transition: height var(--durationTime) ease-out;
+      transition: height var(--durationTime) cubic-bezier(0.4, 0, 0.2, 1);
 
       .children {
         visibility: hidden;
@@ -46,7 +45,7 @@
 }
 
 .expandContainer {
-  margin: 12px 0;
+  margin: 36px 0;
 }
 .expandTitle {
   margin: 24px 0;
