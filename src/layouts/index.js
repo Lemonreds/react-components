@@ -7,15 +7,15 @@ import styles from './styles.less';
 
 const menus = [
   {
-    label: 'Component',
+    label: '组件',
     value: '/comp',
   },
   {
-    label: 'Hook',
+    label: 'Hooks',
     value: '/hook',
   },
   {
-    label: 'Tool',
+    label: '工具',
     value: '/tool',
   },
 ];

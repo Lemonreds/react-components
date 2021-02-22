@@ -23,7 +23,7 @@ export default () => {
             `}
           </pre>
         </Accordion>
-        <Accordion title="Accordion-3" defaultExpand>
+        <Accordion title="Accordion-3">
           <h3 style={{ fontSize: 26 }}>React</h3>
           <p>A JavaScript library for building user interfaces</p>
         </Accordion>
@@ -36,10 +36,7 @@ export default () => {
           and optimization.runtimeChunk options. Here is how the new flow works.
         </Accordion>
       </Accordion.Container>
-      <Description>
-        [2020-09-27] Accordion 折叠面板，主要基于CSS动画以及 visibility
-        属性实现。
-      </Description>
+      <Description>[2020-09-27] Accordion 折叠面板。</Description>
     </Wrapper>
   );
 };

@@ -48,7 +48,7 @@ class Chart extends React.Component {
     return (
       <Echarts
         style={{ width: 595, height: 400, margin: '0 auto' }}
-        renderTooltip={params => {
+        customizeTooltip={params => {
           return (
             <div
               style={{
@@ -62,7 +62,7 @@ class Chart extends React.Component {
               }}
             >
               {params.name}
-              
+
               {params.value}
             </div>
           );

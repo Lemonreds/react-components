@@ -34,7 +34,7 @@ class Chart extends React.Component {
     return (
       <MapCharts
         style={{ width: 595, height: 450 }}
-        renderTooltip={params => <Tooltip data={params} />}
+        customizeTooltip={params => <Tooltip data={params} />}
         option={{
           backgroundColor: '#fff',
           tooltip: null,

@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import echarts from 'echarts';
 import bind from 'utils/bind';
@@ -9,12 +9,16 @@ const defaultWidth = '100%';
 const defaultHeight = 450;
 
 /**
-    @component   对e-charts的react封装, 修改自echart-for-react
+  @component 
+  @at 2019/12/18
+  对e-charts的react封装,修改自echart-for-react
  */
-class Chart extends React.Component {
+class Chart extends Component {
   state = { ins: null };
 
-  ele = null;
+  ele;
+
+  unbind;
 
   componentDidMount() {
     this.init();
@@ -32,51 +36,49 @@ class Chart extends React.Component {
     const { ins } = this.state;
 
     if (!isEqual(prevProps.option, option) || !isEqual(prevState.ins, ins)) {
-      this.renderCharts();
+      this.setChartOption();
     }
   }
 
-  renderCharts = () => {
-    const { option, renderTooltip } = this.props;
+  setChartOption = () => {
+    const { option, customizeTooltip } = this.props;
     const { ins } = this.state;
 
-    const dontUseToolTip = option.tooltip || !renderTooltip;
+    const isCustomizeTooltip = !option.tooltip && customizeTooltip;
 
     return ins.setOption(
       Object.assign(
         {},
         option,
-        dontUseToolTip
-          ? null
-          : {
-              tooltip: {
-                trigger: 'item',
-                showContent: true,
-                backgroundColor: 'transparent',
-                borderColor: 'transparent',
-                triggerOn: 'mousemove',
-                padding: 0,
-                formatter: () => '这段文本其实没什么用 :)',
-                position: (point, param, dom) => {
-                  const fragment = document.createDocumentFragment();
-                  const d = document.createElement('div');
-                  ReactDom.render(
-                    <div
-                      style={{
-                        backgroundColor: '#fff',
-                      }}
-                    >
-                      {renderTooltip(param)}
-                    </div>,
-                    d,
-                  );
-                  fragment.appendChild(d);
-                  dom.innerHTML = '';
-                  dom.appendChild(fragment);
-                  return point;
-                },
-              },
+        isCustomizeTooltip && {
+          tooltip: {
+            trigger: 'item',
+            showContent: true,
+            backgroundColor: 'transparent',
+            borderColor: 'transparent',
+            triggerOn: 'mousemove',
+            padding: 0,
+            formatter: () => 'useless text',
+            position: (point, params, dom) => {
+              const fragment = document.createDocumentFragment();
+              const d = document.createElement('div');
+              ReactDom.render(
+                <div
+                  style={{
+                    backgroundColor: '#fff',
+                  }}
+                >
+                  {customizeTooltip(params)}
+                </div>,
+                d,
+              );
+              fragment.appendChild(d);
+              dom.innerHTML = '';
+              dom.appendChild(fragment);
+              return point;
             },
+          },
+        },
       ),
       true,
     );
@@ -85,36 +87,35 @@ class Chart extends React.Component {
   init() {
     const { onEvents, style, ref } = this.props;
     const ins = echarts.init(this.ele);
-    this.setState(
-      {
-        ins,
-      },
-      () => {
-        if (ref instanceof Function) {
-          ref(ins);
+    this.setState({ ins }, () => {
+      // 绑定echarts实例
+      if (ref instanceof Function) {
+        ref(ins);
+      }
+      // 注册事件监听
+      Object.keys(onEvents).forEach(event => {
+        const listener = onEvents[event];
+        if (listener instanceof Function) {
+          ins.on(event, listener);
         }
-        //  注册监听
-        Object.keys(onEvents).forEach(event => {
-          const listener = onEvents[event];
-          if (listener instanceof Function) {
-            ins.on(event, listener);
-          }
-        });
-        // autoSize
-        bind(this.ele, e => {
-          const { target } = e;
-          try {
-            ins.resize({
-              width: target.clientWidth || defaultWidth,
-              height: style.height || defaultHeight,
-            });
-          } catch (err) {
-            // eslint-disable-next-line no-console
-            console.warn(err);
-          }
-        });
-      },
-    );
+      });
+      // 图表autoSize
+      if (this.unbind) {
+        this.unbind();
+      }
+      this.unbind = bind(this.ele, e => {
+        const { target } = e;
+        try {
+          ins.resize({
+            width: target.clientWidth || defaultWidth,
+            height: style.height || defaultHeight,
+          });
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.warn(err);
+        }
+      });
+    });
   }
 
   render() {
@@ -142,7 +143,7 @@ Chart.defaultProps = {
   option: {}, // e-charts 的配置
   onEvents: {}, // e-charts 的事件监听
   style: {}, // 图表的样式，高度默认是450
-  renderTooltip: null, // 是否自定义tooltip
+  toolTip: null, // 是否自定义tooltip
 };
 
 export default Chart;
