@@ -1,57 +1,78 @@
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import Bar from './Bar';
-import Player from './Player';
+import React, { useReducer, useEffect, useImperativeHandle } from 'react';
+import useDeepCompareEffect from 'use-deep-compare-effect';
+import classnames from 'classnames';
 
-function TimeLine({ datas, duration, onComplete, unitWidth }) {
-  const ref = useRef(null);
-  const [stop, sStop] = useState(true);
+import TimeLineItem from './TimeLineItem';
+import { reducer, initState, ActionTypes } from './reducer';
+import styles from './TimeLine.less';
 
-  const toPrev = () => {
-    ref.current.doPrev();
-  };
+const TimeLine = React.forwardRef((props, ref) => {
+  const {
+    children,
+    pending,
+    alternate,
+    onStateChange,
+    initCurrent,
+    duration,
+    style,
+    className,
+  } = props;
+  const [state, dispatch] = useReducer(reducer, initState);
+  const { itemState } = state;
 
-  const toPlayer = () => {
-    if (!stop) {
-      ref.current.doPause();
-    } else {
-      ref.current.doRun();
+  const items = React.Children.toArray(children);
+
+  if (pending) {
+    items.push(<TimeLineItem />);
+  }
+
+  useImperativeHandle(ref, () => ({
+    doPlay: () => dispatch({ type: ActionTypes.PLAY }),
+    doPause: () => dispatch({ type: ActionTypes.PAUSE }),
+    doPrev: () => dispatch({ type: ActionTypes.PREV }),
+    doNext: () => dispatch({ type: ActionTypes.NEXT }),
+    doReset,
+  }));
+
+  useEffect(() => {
+    if (items.length !== itemState.length) {
+      doReset();
     }
+  }, [children]);
+
+  useDeepCompareEffect(() => {
+    if (onStateChange) {
+      // console.log(state);
+      onStateChange(state);
+    }
+  }, [state]);
+
+  const doReset = () => {
+    dispatch({
+      type: ActionTypes.INIT,
+      payload: { length: items.length, initCurrent },
+    });
   };
 
-  const toNext = () => {
-    ref.current.doNext();
+  const _handleCompleted = index => {
+    dispatch({ type: ActionTypes.COMPLETED, payload: { index } });
   };
 
   return (
-    <React.Fragment>
-      <Bar
-        ref={ref}
-        datas={datas}
-        unitWidth={unitWidth}
-        onStop={sStop}
-        duration={duration}
-        onComplete={onComplete}
-      />
-
-      <Player stop={stop} toPrev={toPrev} toPlayer={toPlayer} toNext={toNext} />
-    </React.Fragment>
+    <ul className={classnames([styles.root], className)} style={style}>
+      {React.Children.map(items, (child, index) =>
+        React.cloneElement(child, {
+          duration,
+          width: 130,
+          ...child.props,
+          group: index % 2 !== 0,
+          alternate,
+          state: itemState[index],
+          onCompleted: () => _handleCompleted(index),
+        }),
+      )}
+    </ul>
   );
-}
-
-TimeLine.propTypes = {
-  datas: PropTypes.array, 
-  onComplete: PropTypes.func, 
-  duration: PropTypes.number,
-  unitWidth: PropTypes.number, 
-};
-
-TimeLine.defaultProps = {
-  datas: [],
-  onComplete: () => {},
-  duration: 4,
-  unitWidth: 220,
-};
+});
 
 export default TimeLine;
-export { TimeLine };

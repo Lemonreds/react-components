@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
 const throttle = (func: (args) => void, wait: number = 10) => {

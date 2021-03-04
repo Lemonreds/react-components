@@ -1,0 +1,71 @@
+@point-width: 14px;
+@point-height: 14px;
+
+.init {
+  width: 0;
+  animation-fill-mode: none;
+}
+
+.complete {
+  background: #004aff;
+  animation-fill-mode: forwards;
+}
+
+.run {
+  background: #004aff;
+  animation-name: zoomMax;
+  animation-play-state: running;
+  animation-fill-mode: forwards;
+}
+
+.pause {
+  background: #004aff;
+  animation-name: zoomMax;
+  animation-play-state: paused;
+  animation-fill-mode: forwards;
+}
+
+@keyframes zoomMax {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.root {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  .bar {
+    display: inline-flex;
+    align-items: center;
+
+    .inactive {
+      height: 4px;
+      background-color: #eee;
+      .active {
+        height: 100%;
+      }
+    }
+    .dot {
+      margin: 0 4px;
+      width: @point-width;
+      height: @point-height;
+      transition: background 100ms ease-in-out;
+      border-radius: 50%;
+      background: #e5e5e5;
+    }
+    .active-dot {
+      background: #004aff;
+    }
+  }
+  .content {
+    min-width: 240px;
+    position: absolute;
+    text-align: center;
+  }
+}

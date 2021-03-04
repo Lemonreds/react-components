@@ -11,7 +11,7 @@ const menus = [
     value: '/comp',
   },
   {
-    label: 'Hooks',
+    label: 'Hook',
     value: '/hook',
   },
   {

@@ -6,7 +6,7 @@ import Loading from './examples/Loading';
 import Captha from './examples/Captha';
 import Form from './examples/Form';
 import HorizontalScroller from './examples/HorizontalScroller';
-import TimeLine from './examples/TimeLine';
+import TimeLine from './examples/TimeLine/index';
 import Echarts from './examples/Echarts';
 import VirtualList from './examples/VirtualList';
 import Tabs from './examples/Tabs';
