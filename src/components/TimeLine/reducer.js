@@ -74,7 +74,11 @@ const init = (_, payload) => {
     itemState: Array(length).fill(INIT),
   };
 
-  const next = initCurrent || newState.current;
+  const next = _getStep({
+    current: initCurrent || newState.current,
+    length,
+    step: 0,
+  });
   return jumpTo(newState, { next, runNow: false });
 };
 

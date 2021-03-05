@@ -1,31 +1,29 @@
-@point-width: 14px;
-@point-height: 14px;
-
-.init {
+ 
+.zoom-width-init {
   width: 0;
   animation-fill-mode: none;
 }
 
-.complete {
+.zoom-width-complete {
   background: #004aff;
   animation-fill-mode: forwards;
 }
 
-.run {
+.zoom-width-run {
   background: #004aff;
-  animation-name: zoomMax;
+  animation-name: zoomWidth;
   animation-play-state: running;
   animation-fill-mode: forwards;
 }
 
-.pause {
+.zoom-width-pause {
   background: #004aff;
-  animation-name: zoomMax;
+  animation-name: zoomWidth;
   animation-play-state: paused;
   animation-fill-mode: forwards;
 }
 
-@keyframes zoomMax {
+@keyframes zoomWidth {
   from {
     width: 0%;
   }
@@ -51,17 +49,7 @@
         height: 100%;
       }
     }
-    .dot {
-      margin: 0 4px;
-      width: @point-width;
-      height: @point-height;
-      transition: background 100ms ease-in-out;
-      border-radius: 50%;
-      background: #e5e5e5;
-    }
-    .active-dot {
-      background: #004aff;
-    }
+     
   }
   .content {
     min-width: 240px;

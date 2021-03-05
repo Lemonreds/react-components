@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
-const throttle = (func: (args) => void, wait: number = 10) => {
+const throttle = (func: () => void, wait: number = 10) => {
   let pre = 0;
   return (...args) => {
     const now = Date.now();
@@ -30,4 +30,29 @@ function bind(element: element, callback: (element) => void) {
   return unbind;
 }
 
+function useResizeObserver() {
+  const ref = useRef();
+  const [changedTarget, set] = useState();
+
+  useEffect(() => {
+    let unbind;
+    if (ref.current) {
+      const ele = ref.current;
+      const observe = new ResizeObserver(
+        throttle(e => {
+          const target = e[0];
+          set(target);
+        }),
+      );
+      observe.observe(ele);
+      unbind = () => observe.disconnect();
+    }
+    return unbind;
+  }, [ref]);
+
+  return [ref, changedTarget];
+}
+
 export default bind;
+
+export { useResizeObserver, bind };

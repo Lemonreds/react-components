@@ -1,5 +1,5 @@
 import TimeLine from './TimeLine';
-import TimeLineItem from './TimeLineItem';
+import TimeLineItem from './TimeLineItem/index';
 
 TimeLine.Item = TimeLineItem;
 

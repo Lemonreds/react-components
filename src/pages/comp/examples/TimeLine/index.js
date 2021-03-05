@@ -13,15 +13,18 @@ export default () => {
   return (
     <Wrapper label="TimeLine" time="2020-06-26">
       <TimeLine
+        ref={ref}
         pending
         alternate
         initCurrent={1}
         duration={2}
-        ref={ref}
         onStateChange={_state => {
           setState(_state);
         }}
-        style={{ height: 220 }}
+        width={100}
+        color="#1976d2"
+        outlined={false}
+        style={{ height: 240 }}
       >
         <TimeLine.Item>
           2018
