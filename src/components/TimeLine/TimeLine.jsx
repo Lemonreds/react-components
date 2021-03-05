@@ -1,4 +1,9 @@
-import React, { useReducer, useEffect, useImperativeHandle } from 'react';
+import React, {
+  useReducer,
+  useEffect,
+  useImperativeHandle,
+  cloneElement,
+} from 'react';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -81,7 +86,7 @@ const TimeLine = React.forwardRef((props, ref) => {
     >
       <ul className={classnames([styles.root], className)} style={style}>
         {React.Children.map(items, (child, index) =>
-          React.cloneElement(child, {
+          cloneElement(child, {
             ...child.props,
             group: index % 2 !== 0,
             state: itemState[index],

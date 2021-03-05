@@ -18,11 +18,11 @@ const TimeLineItem = props => {
   const { className, style, children, group, state, onCompleted } = props;
   const [ref, changedTarget] = useResizeObserver();
   const context = useContext(TimeLineContext);
-  const { duration, alternate, width } = context;
+  const { duration, alternate, width, color } = context;
 
   const hasChildren = !!children;
   const contentStyle = {
-    left: `calc((${width}px + 14px - 4px - 120px))`,
+    left: `calc((${width}px + 12px - 4px - 120px))`,
   };
   if (alternate && group) {
     contentStyle.bottom = 32;
@@ -30,9 +30,12 @@ const TimeLineItem = props => {
     contentStyle.top = 32;
   }
 
-  const activeStyle = {};
+  let activeStyle;
   if (state !== ItemState.INIT) {
-    activeStyle.animationDuration = `${duration}s`;
+    activeStyle = {
+      animationDuration: `${duration}s`,
+      background: color,
+    };
   }
 
   useEffect(() => {

@@ -24,7 +24,7 @@ export default () => {
         width={100}
         color="#1976d2"
         outlined={false}
-        style={{ height: 240 }}
+        style={{ height: 200 }}
       >
         <TimeLine.Item>
           2018
