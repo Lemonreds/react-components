@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import UseDeepCompareEffect from './examples/useDeepCompareEffect';
 import UseResizeObserver from './examples/useResizeObserver';
 import UseDraggable from './examples/useDraggable';
 import UseFullScreen from './examples/useFullScreen';
@@ -10,6 +11,7 @@ import UseInfiniteScroller from './examples/useInfiniteScroller';
 import UseTable from './examples/useTable';
 
 const Comps = [
+  UseDeepCompareEffect,
   UseResizeObserver,
   UseDraggable,
   UseFullScreen,

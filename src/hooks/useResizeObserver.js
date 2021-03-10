@@ -17,14 +17,13 @@ function useResizeObserver() {
   const [changedTarget, set] = useState(null);
 
   useEffect(() => {
-    let disconnect;
     if (ref.current) {
       const ele = ref.current;
       const observe = new ResizeObserver(throttle(entries => set(entries[0])));
       observe.observe(ele);
-      disconnect = () => observe.disconnect();
+      return () => observe.disconnect();
     }
-    return disconnect;
+    return () => {};
   }, [ref]);
 
   return [ref, changedTarget];
