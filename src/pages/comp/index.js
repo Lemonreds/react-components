@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import TextEllipsis from './examples/TextEllipsis';
 import Accordion from './examples/Accordion';
 import createLoadable from './examples/createLoadable';
 import Loading from './examples/Loading';
@@ -13,6 +14,7 @@ import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
 
 const Comps = [
+  TextEllipsis,
   Accordion,
   createLoadable,
   Captha,

@@ -8,6 +8,7 @@ https://lemonreds.github.io/react-components/
 
 ## Component
 
+* TextEllipsis 单行文本省略组件【2021-04-13】
 * Accordion 折叠面板 【2020-09-27】
 * createLoadable Webpack动态导入包装组件 【2020-09-25】
 * Captha 验证码组件 【2020-09-21】
