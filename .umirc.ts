@@ -14,7 +14,7 @@ const resolve = function(dir: string) {
 
 export default defineConfig({
   nodeModulesTransform: { type: 'none' },
-  plugins: ['./umi-plugin-config-routes', './umi-plugin-404'],
+  plugins: ['./umi-plugin-config-routes', './umi-plugin-404','./umi-plugin-intl'],
   // umi-plugin-config-routes的自定义配置
   configRoutes: {
     strict: true, // 强匹配，路由只匹配文件名有 index|layout|404 的文件

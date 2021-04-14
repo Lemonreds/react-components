@@ -29,6 +29,7 @@
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-intl": "^5.15.8",
     "react-transition-group": "^4.4.1",
     "resize-observer-polyfill": "^1.5.1",
     "umi": "^3.2.5",

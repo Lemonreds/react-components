@@ -31,7 +31,7 @@ const plugin404 = (api: IApi) => {
     },
   });
 
-  api.modifyRoutes((routes: IRoute) => {
+  api.modifyRoutes(routes => {
     const { notFound: { component } = defaultOptions } = api.config;
 
     append404Route(routes, component);
