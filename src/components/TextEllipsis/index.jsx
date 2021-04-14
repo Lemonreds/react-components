@@ -17,7 +17,7 @@ const getEllipsisText = (text, maxWidth) => {
   let end = text.length - 1;
   let subText;
   while (start <= end) {
-    subText = text.slice(0, end - 3); // 每次计算减少3个字符，相应减少计算次数
+    subText = text.slice(0, end - 1);
 
     if (measureText(subText) <= maxWidth) {
       break;

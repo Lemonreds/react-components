@@ -1,6 +1,6 @@
 ## React-Components
 
-记录React开发中积累的组件、Hook，以及UMI、Webpack相关。
+记录React开发中积累的组件、Hook，以及UMI3、Webpack相关。
 
 ## LIVE
 
@@ -28,7 +28,7 @@ https://lemonreds.github.io/react-components/
 
 ## Hook
 
-* useResizeObserver useResizeObserver 【2021-03-04】
+* useResizeObserver 监听DOM元素的宽高以及位置变化 【2021-03-04】
 * useDraggable 使容器内的DOM可拖拽 【2020-09-23】
 * useFullScreen 基于screenfull的元素全屏【2020-09-01】
 * useTable 表格状态提取 【2020-08-26】

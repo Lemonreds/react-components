@@ -57,7 +57,7 @@ const useInfiniteScroller = ({
           if (isFunction(loadMore)) loadMore();
         }
         inBottom.current = isReachBottom;
-      } else throw new Error('`ref.current` is null.');
+      }
     }
   });
 
