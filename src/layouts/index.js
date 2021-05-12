@@ -15,6 +15,10 @@ const menus = [
     value: '/hook',
   },
   {
+    label: 'Demo',
+    value: '/third-party',
+  },
+  {
     label: '工具',
     value: '/tool',
   },

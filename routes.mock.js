@@ -1,4 +1,4 @@
-module.exports= [
+module.exports = [
   {
     path: '/',
     component: '@/layouts/index.js',
@@ -103,6 +103,11 @@ module.exports= [
           },
         ],
         component: '@/pages/hook/_layout.js',
+      },
+      {
+        path: '/third-party',
+        exact: true,
+        component: '@/pages/third-party/index.js',
       },
     ],
   },

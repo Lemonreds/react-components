@@ -37,6 +37,11 @@ https://lemonreds.github.io/react-components/
 * useVirtual 虚拟滚动列表，支持高度不一致【2020-08-21】
 * useOnScreen 监听DOM元素是否可见 【2020-08-21】
 
+## Demo
+
+* AliPlayer react封装AliPlayer的例子 【2021-05-10】
+* PdfView react-pdf的使用例子以及分页器 【2021-05-10】
+
 ## Other
 
 * react-intl 的多语言方案,封装了常用的功能 【2021-04-14】
