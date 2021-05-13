@@ -1,5 +1,5 @@
 function addScript(source: string): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const s = document.createElement('script');
     s.src = source;
     s.setAttribute('charset', 'utf-8');
@@ -11,7 +11,7 @@ function addScript(source: string): Promise<void> {
 }
 
 function addStyleLink(source: string): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const l = document.createElement('link');
     l.type = 'text/css';
     l.rel = 'stylesheet';
@@ -99,19 +99,14 @@ const skinLayout = [
 
 // async AliplayerSDK inject to html
 const asyncAliplayerSDK = () => {
-  let loaded = false;
-
-  return () => {
-    if (loaded) {
-      return Promise.resolve();
-    } else {
-      loaded = true;
-      return Promise.all([
-        addStyleLink(playerCDN.stylelink),
-        addScript(playerCDN.script),
-      ]);
-    }
-  };
+  if (window.Aliplayer) {
+    return Promise.resolve();
+  } else {
+    return Promise.all([
+      addStyleLink(playerCDN.stylelink),
+      addScript(playerCDN.script),
+    ]);
+  }
 };
 
 export { skinLayout, asyncAliplayerSDK };

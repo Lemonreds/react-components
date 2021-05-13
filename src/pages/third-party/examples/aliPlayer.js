@@ -22,8 +22,7 @@ export default () => {
   const ref = useRef(null);
 
   useEffect(() => {
-    const asyncSDK = asyncAliplayerSDK();
-    asyncSDK().then(() => {
+    asyncAliplayerSDK().then(() => {
       ref.current.init();
     });
   }, []);
