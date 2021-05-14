@@ -98,7 +98,7 @@ const skinLayout = [
 ];
 
 // async AliplayerSDK inject to html
-const asyncAliplayerSDK = () => {
+const loadSDK = () => {
   if (window.Aliplayer) {
     return Promise.resolve();
   } else {
@@ -109,4 +109,4 @@ const asyncAliplayerSDK = () => {
   }
 };
 
-export { skinLayout, asyncAliplayerSDK };
+export { skinLayout, loadSDK };

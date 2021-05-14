@@ -1,7 +1,7 @@
 import Player from './Player';
 
-import { asyncAliplayerSDK } from './util';
+import { loadSDK } from './util';
 
 export default Player;
 
-export { asyncAliplayerSDK };
+export { loadSDK };

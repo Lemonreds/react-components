@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import Wrapper from 'components/Wrapper';
 import Description from 'components/Description';
-import AliPlayer, { asyncAliplayerSDK } from 'components/AliPlayer';
+import AliPlayer, { loadSDK } from 'components/AliPlayer';
 
 const config = {
   width: '100%',
@@ -22,7 +22,7 @@ export default () => {
   const ref = useRef(null);
 
   useEffect(() => {
-    asyncAliplayerSDK().then(() => {
+    loadSDK().then(() => {
       ref.current.init();
     });
   }, []);
