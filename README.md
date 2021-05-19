@@ -38,6 +38,7 @@ https://lemonreds.github.io/react-components/
 * useOnScreen 监听DOM元素是否可见 【2020-08-21】
 
 ## Demo
+* better-scroll react使用better-scroll的例子 【2021-05-19】
 * swiper react使用swiper.js/react的例子 【2021-05-14】
 * AliPlayer react封装AliPlayer的例子 【2021-05-10】
 * PdfView react-pdf的使用例子以及分页器 【2021-05-10】

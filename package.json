@@ -21,8 +21,10 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^5.0.12",
+    "@better-scroll/pull-down": "^2.3.1",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.5",
+    "better-scroll": "^2.3.1",
     "echarts": "^4.8.0",
     "html-critical-webpack-plugin": "^2.1.0",
     "lint-staged": "^10.0.7",
