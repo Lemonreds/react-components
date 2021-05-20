@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { memo, useRef, useEffect, useState } from 'react';
 import BScroll from '@better-scroll/core';
 import PullDown from '@better-scroll/pull-down';
 import Pullup from '@better-scroll/pull-up';
@@ -8,23 +8,37 @@ import styles from './PullRefresh.less';
 BScroll.use(PullDown);
 BScroll.use(Pullup);
 
-const PullRefreshHeader = ({ beforePullDown, isPullingDown }) => {
-  let text;
+const PullRefreshHeader = memo(
+  ({ beforePullDown, isPullingDown }) => {
+    let text;
 
-  if (beforePullDown) {
-    text = '下拉可以刷新';
-  } else {
-    text = isPullingDown ? '加载中...' : '加载成功';
-  }
+    if (beforePullDown) {
+      text = '下拉可以刷新';
+    } else {
+      text = isPullingDown ? '加载中...' : '加载成功';
+    }
 
-  return text;
-};
+    return text;
+  },
+  (prevProps, nextProps) => {
+    const { beforePullDown, isPullingDown } = prevProps;
+    return (
+      beforePullDown === nextProps.beforePullDown &&
+      isPullingDown === nextProps.isPullingDown
+    );
+  },
+);
 
-const PullRefreshFooter = ({ isPullUpLoad }) => {
-  const text = isPullUpLoad ? '加载中....' : '加载更多';
-
-  return text;
-};
+const PullRefreshFooter = memo(
+  ({ isPullUpLoad }) => {
+    const text = isPullUpLoad ? '加载中....' : '加载更多';
+    return text;
+  },
+  (prevProps, nextProps) => {
+    const { isPullUpLoad } = prevProps;
+    return isPullUpLoad === nextProps.isPullUpLoad;
+  },
+);
 
 const TIME_BOUNCE = 800;
 const THRESHOLD = 60;
@@ -42,12 +56,13 @@ function PullRefresh(props) {
   const handlePullingDown = () => {
     setBeforePullDown(false);
     setIsPullingDown(true);
-
     refresh().then(() => {
       setIsPullingDown(false);
-      setBeforePullDown(true);
-      insRef.current.finishPullDown();
-      insRef.current.refresh();
+      setTimeout(() => {
+        setBeforePullDown(true);
+        insRef.current.finishPullDown();
+        insRef.current.refresh();
+      }, TIME_BOUNCE);
     });
   };
 
