@@ -1,5 +1,6 @@
 import React, { useRef, useImperativeHandle } from 'react';
 import { skinLayout } from './util';
+import './Player.less';
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string;
