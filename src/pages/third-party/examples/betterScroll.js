@@ -45,6 +45,9 @@ export default () => {
             return (
               <div
                 key={label}
+                onClick={() => {
+                  console.log(item);
+                }}
                 style={{
                   textAlign: 'center',
                   height: 40,

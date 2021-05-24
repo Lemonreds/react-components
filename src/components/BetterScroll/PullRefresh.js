@@ -80,6 +80,7 @@ function PullRefresh(props) {
       scrollY: true,
       bounceTime: TIME_BOUNCE,
       useTransition: false,
+      click: true,
     };
     // 不传入 refresh ,不开启下拉刷新
     if (refresh) {
