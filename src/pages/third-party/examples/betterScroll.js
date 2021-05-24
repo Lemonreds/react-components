@@ -37,7 +37,7 @@ export default () => {
 
   return (
     <Wrapper label="better-scroll的react封装" time="2021-05-19">
-      <Part>使用pull-down/pull-up,下拉刷洗以及底部加载更多的2个插件</Part>
+      <Part>使用pull-down/pull-up,下拉刷新以及上拉加载的2个插件</Part>
       <div style={{ height: 280 }}>
         <PullRefresh refresh={refresh} loadMore={loadMore}>
           {data.map(item => {
@@ -48,6 +48,7 @@ export default () => {
                 style={{
                   textAlign: 'center',
                   height: 40,
+                  lineHeight: '40px',
                 }}
               >
                 {label}

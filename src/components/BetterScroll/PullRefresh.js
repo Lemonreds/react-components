@@ -76,21 +76,29 @@ function PullRefresh(props) {
   };
 
   useEffect(() => {
-    const ins = new BScroll(wrapperRef.current, {
+    const options = {
       scrollY: true,
       bounceTime: TIME_BOUNCE,
       useTransition: false,
-      pullDownRefresh: {
+    };
+    // 不传入 refresh ,不开启下拉刷新
+    if (refresh) {
+      options.pullDownRefresh = {
         threshold: THRESHOLD,
         stop: STOP,
-      },
-      pullUpLoad: true,
-    });
+      };
+    }
+    // 不传入 loadMore ,不开启加载更多
+    if (loadMore) {
+      options.pullUpLoad = true;
+    }
+
+    const ins = new BScroll(wrapperRef.current, options);
 
     insRef.current = ins;
+
     ins.on('pullingDown', handlePullingDown);
     ins.on('pullingUp', handlePullingUp);
-
     return () => {
       ins.off('pullingDown', handlePullingDown);
       ins.off('pullingUp', handlePullingUp);
@@ -101,16 +109,21 @@ function PullRefresh(props) {
     <div className={styles.container}>
       <div className={styles.bswrapper} ref={wrapperRef}>
         <div className={styles.inner}>
-          <div className={styles.header}>
-            <PullRefreshHeader
-              beforePullDown={beforePullDown}
-              isPullingDown={isPullingDown}
-            />
-          </div>
+          {refresh && (
+            <div className={styles.header}>
+              <PullRefreshHeader
+                beforePullDown={beforePullDown}
+                isPullingDown={isPullingDown}
+              />
+            </div>
+          )}
+
           <div className={styles.children}>{children}</div>
-          <div className={styles.footer}>
-            <PullRefreshFooter isPullUpLoad={isPullUpLoad} />
-          </div>
+          {loadMore && (
+            <div className={styles.footer}>
+              <PullRefreshFooter isPullUpLoad={isPullUpLoad} />
+            </div>
+          )}
         </div>
       </div>
     </div>
