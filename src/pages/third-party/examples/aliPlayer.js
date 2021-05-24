@@ -23,7 +23,7 @@ export default () => {
 
   useEffect(() => {
     loadSDK().then(() => {
-      ref.current.init();
+      ref.current?.init();
     });
   }, []);
 

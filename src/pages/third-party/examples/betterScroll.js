@@ -46,7 +46,7 @@ export default () => {
               <div
                 key={label}
                 onClick={() => {
-                  console.log(item);
+                  window.console.log(item);
                 }}
                 style={{
                   textAlign: 'center',
