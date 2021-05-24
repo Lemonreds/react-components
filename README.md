@@ -42,10 +42,10 @@ https://lemonreds.github.io/react-components/
 * swiper react使用swiper.js/react的例子 【2021-05-14】
 * AliPlayer react封装AliPlayer的例子 【2021-05-10】
 * PdfView react-pdf的使用例子以及分页器 【2021-05-10】
+* react-intl 的多语言方案,封装了常用的功能 【2021-04-14】
 
 ## Other
 
-* react-intl 的多语言方案,封装了常用的功能 【2021-04-14】
 * CSSvariable  基于CSS变量的换肤 【2020-09-18】
 
 ## UMI-PLUGIN
