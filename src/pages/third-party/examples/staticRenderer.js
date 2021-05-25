@@ -11,8 +11,6 @@ export default () => {
   const [propB, setPropB] = useState('我是 propB');
   const prevPropA = usePrevious(propA);
 
-  const shouldUpdate = useMemo(() => prevPropA !== propA, [propA]);
-
   return (
     <Wrapper label="StaticRenderer，手动触发react的更新时机" time="2021-05-24">
       <Part>样例：</Part>
@@ -32,7 +30,7 @@ export default () => {
         const [propB, setPropB] = useState('我是 propB');
         const prevPropA = usePrevious(propA);
 
-        const shouldUpdate = useMemo(() => prevPropA !== propA, [propA]);
+        const shouldUpdate = prevPropA !== propA;
         只会在propA改变的时候重新render，其他时机不会render
         `}
       </pre>
@@ -40,7 +38,7 @@ export default () => {
       <StaticRenderer
         propA={propA}
         propB={propB}
-        shouldUpdate={shouldUpdate}
+        shouldUpdate={prevPropA !== propA}
         render={() => {
           window.console.log('rendered');
           return <div>{propA}</div>;
