@@ -5,6 +5,8 @@ import Footer from './Footer';
 import Themes from './Themes';
 import styles from './styles.less';
 
+import '../global.less';
+
 const menus = [
   {
     label: '组件',
@@ -19,7 +21,7 @@ const menus = [
     value: '/third-party',
   },
   {
-    label: '工具',
+    label: 'Tool',
     value: '/tool',
   },
 ];
@@ -34,33 +36,40 @@ class Layout extends React.Component {
 
   render() {
     const { children } = this.props;
+
+    const isSkinPage = location.href.includes('skin');
+
     return (
       <div className={styles.root}>
-        <nav className={styles.navbar}>
-          <h3 className={styles.title}>ReactComponents</h3>
-          <div className={styles.links}>
-            {menus.map(({ label, value }) => {
-              return (
-                <Link
-                  to={value}
-                  key={value}
-                  className={location.href.includes(value) ? styles.active : ''}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-            <a
-              target=" _blank"
-              href="https://github.com/Lemonreds/react-components"
-            >
-              Github
-            </a>
-          </div>
-        </nav>
+        {!isSkinPage && (
+          <nav className={styles.navbar}>
+            <h3 className={styles.title}>ReactComponents</h3>
+            <div className={styles.links}>
+              {menus.map(({ label, value }) => {
+                return (
+                  <Link
+                    to={value}
+                    key={value}
+                    className={
+                      location.href.includes(value) ? styles.active : ''
+                    }
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+              <a
+                target=" _blank"
+                href="https://github.com/Lemonreds/react-components"
+              >
+                Github
+              </a>
+            </div>
+          </nav>
+        )}
         <div className={styles.content}>{children}</div>
         <BackToTop />
-        <Footer />
+        {!isSkinPage && <Footer />}
         <Themes />
       </div>
     );

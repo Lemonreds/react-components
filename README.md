@@ -38,16 +38,17 @@ https://lemonreds.github.io/react-components/
 * useOnScreen 监听DOM元素是否可见 【2020-08-21】
 
 ## Demo
+
 * better-scroll react使用better-scroll的例子 【2021-05-19】
 * swiper react使用swiper.js/react的例子 【2021-05-14】
 * AliPlayer react封装AliPlayer的例子 【2021-05-10】
 * PdfView react-pdf的使用例子以及分页器 【2021-05-10】
 * react-intl 的多语言方案,封装了常用的功能 【2021-04-14】
 
-## Other
+## Tool
 
 * CSSvariable  基于CSS变量的换肤 【2020-09-18】
-
+* StorageTool 统一用JSON格式来读写localStorage 【2020-08-26】
 ## UMI-PLUGIN
 
 * umi-plugin-intl 当不使用umi的plugin-locale时，为umi增加react-intl的默认导出 【2021-04-14】
@@ -55,6 +56,8 @@ https://lemonreds.github.io/react-components/
 * umi-plugin-config-routes  对UMI3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。【2020-09-15】
 
 ## 本地运行
+
+或者使用 yarn/cnpm 来安装node依赖.
 
 1. npm run install
 

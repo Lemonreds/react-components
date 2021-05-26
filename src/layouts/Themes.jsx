@@ -25,4 +25,4 @@ function ThemesComponent({ theme, dispatch }) {
 
 export default connect(store => ({
   theme: store.theme.theme,
-}))(React.memo(ThemesComponent));
+}))(ThemesComponent);

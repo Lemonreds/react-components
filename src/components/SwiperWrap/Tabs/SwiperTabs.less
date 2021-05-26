@@ -1,0 +1,44 @@
+.tabsWrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .deafultTabs {
+    position: relative;
+    .tabsWrap {
+      width: 100%;
+      display: flex;
+      flex-shrink: 0;
+      position: relative;
+      .tabList {
+        width: 100%;
+        display: flex;
+        touch-action: pan-y;
+        .tab {
+          flex-shrink: 0;
+          display: inline-flex;
+          justify-content: center;
+          padding: 8px 0;
+          cursor: pointer;
+          user-select: none;
+          border: 1px solid #eee;
+        }
+        .active {
+          color: var(--primary);
+        }
+        transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+        will-change: transform;
+      }
+    }
+    .indicator {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      height: 2px;
+      background: var(--primary);
+      transition: left 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+      will-change: top, left, width, color;
+      border-radius: 4px;
+    }
+  }
+}
