@@ -11,17 +11,10 @@ function TabsRenderer(props) {
     // 单位Tab的宽度
     const _unitWidth = 100 / page;
 
-    // page = 3
-    // current 0 1   2 3 4 5 6 7   8 9
-    // offset  0 0   1 2 3 4 5 6   6 6
-
-    // current 0 1   2 3   4 5
-    // offset  0 0   1 2   3 3
     const half = Math.round(page / 2);
     const start = 0;
     const end = length - 1;
 
-    // 整体Tab的偏移量
     let _offset = 0;
 
     const isBegin = current < start + half; // 第一页的前半部分数据
@@ -33,6 +26,8 @@ function TabsRenderer(props) {
     } else {
       _offset = current - 1;
     }
+
+    _offset = Math.max(0, _offset);
 
     // 指示器偏移左边的距离
     const _left = ((current - _offset) % page) * _unitWidth;

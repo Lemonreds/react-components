@@ -1,0 +1,15 @@
+@time-duration: 300ms;
+
+.m-refresh-container {
+  .m-refresh-body {
+    transition: transform @time-duration cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform;
+
+    .m-refresh-header {
+      position: absolute;
+      width: 100%;
+      transform: translateY(-100%) translateZ(2px);
+      padding: 20px 0;
+    }
+  }
+}

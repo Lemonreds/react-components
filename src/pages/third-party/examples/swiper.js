@@ -21,7 +21,7 @@ const tabs = [
 export default () => {
   return (
     <Wrapper label="Swiper.js" time="-">
-      <SwiperTabs tabs={tabs} page={4}>
+      <SwiperTabs tabs={tabs} page={2}>
         {new Array(tabs.length).fill(true).map((_, index) => {
           return (
             <div
@@ -66,8 +66,6 @@ export default () => {
         })}
       </Swiper>
       <Description>[2021-05-14] 基础轮播图</Description>
-
-      <Description>使用 Swiper.js/react 的示例</Description>
     </Wrapper>
   );
 };
