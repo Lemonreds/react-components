@@ -33,7 +33,7 @@ class MPullToRefresh extends React.Component {
 
   timer;
 
-  dy;
+  lastScreenY;
 
   shouldUpdateChildren = false;
 
@@ -53,32 +53,37 @@ class MPullToRefresh extends React.Component {
     }, 0);
   }
 
-  shouldComponentUpdate(nextProps) {
-    const { children } = this.props;
-    this.shouldUpdateChildren = children !== nextProps.children;
-    return true;
+  componentWillUnmount() {
+    this.destroy();
   }
 
-  componentWillUnmount() {
+  init = () => {
+    const { loadMore } = this.props;
+    const ele = this.containerRef;
+    if (ele) {
+      this._to = {
+        touchstart: this.onTouchStart,
+        touchmove: this.onTouchMove,
+        touchend: this.onTouchEnd,
+        touchcancel: this.onTouchEnd,
+      };
+      if (loadMore) {
+        // avoid addEventListener
+        // improve performance
+        this._to.scroll = this.onScroll;
+      }
+      Object.keys(this._to).forEach(key => {
+        const handle = this._to[key];
+        ele.addEventListener(key, handle, willPreventDefault);
+      });
+    }
+  };
+
+  destroy = () => {
     const ele = this.containerRef;
     Object.keys(this._to).forEach(key => {
       const handle = this._to[key];
       ele.removeEventListener(key, handle, willPreventDefault);
-    });
-  }
-
-  init = () => {
-    const ele = this.containerRef;
-    this._to = {
-      touchstart: this.onTouchStart,
-      touchmove: this.onTouchMove,
-      touchend: this.onTouchEnd,
-      touchcancel: this.onTouchEnd,
-      scroll: this.onScroll,
-    };
-    Object.keys(this._to).forEach(key => {
-      const handle = this._to[key];
-      ele.addEventListener(key, handle, willPreventDefault);
     });
   };
 
@@ -89,9 +94,10 @@ class MPullToRefresh extends React.Component {
 
   onTouchStart = e => {
     const { screenX, screenY } = e.touches[0];
-
+    this.ScreenY = screenY;
     this.startScreenX = screenX;
     this.startScreenY = screenY;
+    this.lastScreenY = this.lastScreenY || 0;
   };
 
   onTouchMove = e => {
@@ -116,15 +122,15 @@ class MPullToRefresh extends React.Component {
       }
 
       const _diff = Math.round(screenY - this.ScreenY);
-      const dy = this.easing(_diff);
+      this.ScreenY = screenY;
+      this.lastScreenY += this.damping(_diff);
 
-      this.dy = dy;
-      this.setContentStyle(dy);
+      this.setContentStyle(this.lastScreenY);
 
       const { distanceToRefresh } = this.props;
       const { hStatus } = this.state;
 
-      if (dy < distanceToRefresh) {
+      if (this.lastScreenY < distanceToRefresh) {
         if (hStatus !== RrefshStatus.deactivate) {
           this.setState({ hStatus: RrefshStatus.deactivate });
         }
@@ -187,11 +193,23 @@ class MPullToRefresh extends React.Component {
     }
   };
 
-  easing = distance => {
-    const { availHeight } = window.screen;
-    return (
-      (availHeight / 2.5) * Math.sin((distance / availHeight) * (Math.PI / 2))
-    );
+  // easing = distance => {
+  //   const { availHeight } = window.screen;
+  //   return (
+  //     (availHeight / 2.5) * Math.sin((distance / availHeight) * (Math.PI / 2))
+  //   );
+  // };
+  damping = dy => {
+    const { distanceToRefresh, scale } = this.props;
+    if (Math.abs(this.lastScreenY) > distanceToRefresh) {
+      return 0;
+    }
+
+    const ratio =
+      Math.abs(this.ScreenY - this.startScreenY) / window.screen.height;
+    const _dy = dy * (1 - ratio) * scale;
+
+    return _dy;
   };
 
   onScroll = e => {
