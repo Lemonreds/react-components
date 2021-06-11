@@ -39,7 +39,6 @@ https://lemonreds.github.io/react-components/
 
 ## Demo
 
-* pull-to-refresh 移动端下拉刷新组件，修改了rmc-pull-to-refresh 【2021-06-04】
 * better-scroll react使用better-scroll的例子 【2021-05-19】
 * swiper react使用swiper.js/react的例子 
   - SwiperTabs 基于swiper的Tabs组件 【2021-05-26】
