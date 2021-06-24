@@ -27,7 +27,7 @@ export default () => {
       </FeedBack>
       <Description>
         [2021-04-15]
-        FeedBack，点击反馈效果组件。点击某个组件后，为组件增加active样式，提供一个反馈效果，适用PC端和移动端。
+        FeedBack，触摸反馈效果组件。点击某个组件后，为组件增加active样式，提供一个反馈效果，适用PC端和移动端。
       </Description>
     </Wrapper>
   );
