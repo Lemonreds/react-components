@@ -29,6 +29,7 @@ https://lemonreds.github.io/react-components/
 
 ## Hook
 
+* useFontSize 该hook可以提取H5页面在andoird/iOS下，字体缩放的比例 【2021-07-15】
 * useLatestRef 用于解决函数组件闭包陷阱的hook 【2021-07-15】
 * useResizeObserver 监听DOM元素的宽高以及位置变化 【2021-03-04】
 * useDraggable 使容器内的DOM可拖拽 【2020-09-23】

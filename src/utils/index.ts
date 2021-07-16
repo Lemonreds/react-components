@@ -1,4 +1,3 @@
-
 // 过滤掉所有的HTML标签
 const remoHTMLTag = str => {
   return typeof str === 'string' ? str.replace(/<[^>]+>/g, '') : str;
@@ -22,3 +21,7 @@ const entityToHTMLTag = str => {
         .replace(/&quot;/gi, '"')
     : str;
 };
+
+const u = window.navigator.userAgent;
+export const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+export const isIOS = /(iPhone|iPad|iPod|iOS|Mac)/i.test(u);
