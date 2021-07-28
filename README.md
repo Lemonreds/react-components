@@ -8,6 +8,7 @@ https://lemonreds.github.io/react-components/
 
 ## Component
 
+* MarQuee 文字走马灯组件 【2021-07-28】
 * FeedBack 触摸反馈效果组件【2021-04-15】
 * TextEllipsis 单行文本省略组件【2021-04-13】
 * Accordion 折叠面板 【2020-09-27】

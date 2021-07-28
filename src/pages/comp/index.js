@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import MarQuee from './examples/MarQuee';
 import FeedBack from './examples/FeedBack';
 import TextEllipsis from './examples/TextEllipsis';
 import Accordion from './examples/Accordion';
@@ -15,6 +16,7 @@ import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
 
 const Comps = [
+  MarQuee,
   FeedBack,
   TextEllipsis,
   Accordion,

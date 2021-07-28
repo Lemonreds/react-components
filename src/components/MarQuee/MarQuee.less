@@ -1,0 +1,24 @@
+.marquee_box {
+  width: 100%;
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee_text {
+  position: relative;
+  animation-play-state: running;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.marquee_text_pause {
+  animation-play-state: paused;
+}
+
+.marquee_un_initial {
+  opacity: 0;
+}
