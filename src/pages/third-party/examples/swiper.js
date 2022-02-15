@@ -21,12 +21,12 @@ const tabs = [
 export default () => {
   return (
     <Wrapper label="Swiper.js" time="-">
-      <SwiperTabs tabs={tabs} page={2}>
+      <SwiperTabs tabs={tabs} page={4}>
         {new Array(tabs.length).fill(true).map((_, index) => {
           return (
             <div
               style={{
-                background: colors[(colors.length - index) % colors.length],
+                background: colors[index % colors.length],
                 height: 220,
                 fontSize: 14,
                 display: 'flex',
