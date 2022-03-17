@@ -42,6 +42,7 @@ https://lemonreds.github.io/react-components/
 
 ## Demo
 
+* react-pdf 基于react-pdf的改造，增加了虚拟滚动的支持 【2022-03-14】
 * react-fast-marquee 兼容了IE11的文字跑马灯【2022-02-15】
 * m-pull-to-refresh 一个支持下拉刷新、上拉加载的 React 移动端组件。 【2021-06-24】
 * better-scroll react使用better-scroll的例子 【2021-05-19】

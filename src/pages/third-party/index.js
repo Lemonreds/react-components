@@ -6,6 +6,7 @@ import StaticRenderer from './examples/staticRenderer';
 import BetterScroll from './examples/betterScroll';
 import Swiper from './examples/swiper';
 import AliPlayer from './examples/aliPlayer';
+import RCPDF from './examples/rc-pdf';
 import PdfView from './examples/pdf-view';
 import Intls from './examples/intl';
 
@@ -16,6 +17,7 @@ const Comps = [
   BetterScroll,
   Swiper,
   AliPlayer,
+  RCPDF,
   PdfView,
   Intls,
 ];

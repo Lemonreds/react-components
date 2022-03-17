@@ -8,7 +8,7 @@ export default () => {
     <Wrapper label="PdfViewer PDF阅读器" time="2021-05-10">
       <PdfViewer url="/test.pdf" />
 
-      <Description>PdfViewer,使用react-pdf的一个实例，并做了一个分页器。</Description>
+      <Description>PdfViewer,使用react-pdf的一个二次封装，并做了一个分页器。</Description>
     </Wrapper>
   );
 };

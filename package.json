@@ -37,7 +37,9 @@
     "react-window": "^1.8.6",
     "resize-observer-polyfill": "^1.5.1",
     "swiper": "^6.6.1",
-    "umi": "^3.2.5",
+    "ahooks": "^3.1.13",
+    "umi": "^3.2.5", 
+    "pdfjs-dist": "1.6.210",
     "use-deep-compare-effect": "^1.6.1",
     "yorkie": "^2.0.0"
   },
