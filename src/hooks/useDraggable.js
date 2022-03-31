@@ -1,12 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { off, on } from 'utils/dom';
-import useMount from './useMount';
 
 /**
  * @hook useDraggable
- * @desc 使得DOM变得可拖拽
- * @at 2020/09/22
- * @by lmh
  * */
 
 // 拖拽的初始位置
@@ -25,7 +21,7 @@ const useDraggable = (
   const isDragging = useRef(null);
   const ref = useRef(null);
 
-  useMount(() => {
+  useEffect(() => {
     const mouseMove = e => {
       if (ref.current === currentTarget) {
         if (isDragging.current) {
@@ -36,7 +32,6 @@ const useDraggable = (
 
             let x = e.clientX - initPosition.x;
             let y = e.clientY - initPosition.y;
-
             // 是否允许 拖拽位置脱离边界
             if (!overbound) {
               if (x < 0) x = 0;

@@ -41,7 +41,9 @@
     "umi": "^3.2.5", 
     "pdfjs-dist": "1.6.210",
     "use-deep-compare-effect": "^1.6.1",
-    "yorkie": "^2.0.0"
+    "yorkie": "^2.0.0", 
+    "videojs": "^1.0.0",
+    "videojs-contrib-hls": "5.15.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

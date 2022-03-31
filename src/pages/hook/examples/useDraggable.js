@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import Wrapper from 'components/Wrapper';
 import Description from 'components/Description';
 import useDraggable from 'hooks/useDraggable';
-import Links from 'components/Links';
 import Part from 'components/Part';
 import DraggleLayout from 'components/DraggleLayout';
 
