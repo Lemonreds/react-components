@@ -1,0 +1,20 @@
+@nav-height: 50px;
+@mask-zIndex: 1000;
+
+.dropdown {
+  .dropdown-nav {
+    height: @nav-height;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+    display: flex;
+  }
+  .dropdown-popup {
+    position: fixed;
+    top: @nav-height;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+   
+  }
+}

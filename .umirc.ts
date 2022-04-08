@@ -16,12 +16,12 @@ const resolve = function(dir: string) {
 export default defineConfig({
   nodeModulesTransform: { type: 'none' },
   plugins: [
-    './umi-plugin-config-routes',
+    './umi-plugin-routes-filter',
     './umi-plugin-404',
     './umi-plugin-intl',
   ],
-  // umi-plugin-config-routes的自定义配置
-  configRoutes: {
+  // umi-plugin-routes-filter的自定义配置
+  filterRoutes: {
     strict: true, // 强匹配，路由只匹配文件名有 index|layout|404 的文件
     exclude: /examples|tests/, // 再进一步过滤掉匹配到的路由
   },

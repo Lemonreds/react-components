@@ -61,7 +61,7 @@ https://lemonreds.github.io/react-components/
 
 * umi-plugin-intl 当不使用umi的plugin-locale时，为umi增加react-intl的默认导出 【2021-04-14】
 * umi-plugin-404  为UMI3的约定式路由补上404路由 【2020-09-16】
-* umi-plugin-config-routes  对UMI3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。【2020-09-15】
+* umi-plugin-filter-routes  对UMI3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。【2020-09-15】
 
 ## 本地运行
 

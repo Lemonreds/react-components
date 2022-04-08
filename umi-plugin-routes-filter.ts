@@ -1,17 +1,10 @@
 import { IApi, IRoute } from 'umi';
 
-// umi2和umi的插件文档不同
-
-// umi2=@ref: https://v2.umijs.org/zh/plugin/develop.html#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%8F%92%E4%BB%B6
-// umi3=@ref: https://umijs.org/zh-CN/plugins/api
-
 const defaultOptions = { strict: true, exclude: null };
 const strictRegex = /(layout|index|404)(.js|.jsx|.ts|.tsx)$/;
 
 /**
- * @plugin umi-plugin-config-routes
- * @des umi3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。
- 
+ * umi3约定式路由的再过滤，过滤一些不需要的路由规则，可以删减一些被错误当作路由引入的组件。
  `umi的约定式路由下：
 
   pages/home/index.js
@@ -24,20 +17,11 @@ const strictRegex = /(layout|index|404)(.js|.jsx|.ts|.tsx)$/;
   3. path `pages/home/utils.js`         
  
   其中2和3是误添加的，并非真正的路由。
-
-  解决方式：
-  1. 通过手工在umirc.js下配置config(规则和 react-router/config一致)，来配自己需要的路由。
-    @ref https://reactrouter.com/web/example/route-config
-  2. 通过umi的自定义插件中的 modifyRoutes API，来过滤掉不需要的路由，参考如下: 
- 
- * @by lmh
- * @at 2020/09/15
- *
- */
-const configRoutesPlugin = (api: IApi) => {
-  // 定义 .umirc.ts 中可以配置 configRoutes 属性，作为该插件的 option
+**/
+const routeFilterPlugin = (api: IApi) => {
+  // 定义 .umirc.ts 中可以配置 filterRoutes 属性，作为该插件的 option
   api.describe({
-    key: 'configRoutes',
+    key: 'filterRoutes',
     config: {
       schema(joi) {
         return joi.object();
@@ -46,9 +30,9 @@ const configRoutesPlugin = (api: IApi) => {
   });
 
   api.modifyRoutes((routes: IRoute) => {
-    const { configRoutes } = api.config;
+    const { filterRoutes } = api.config;
     // 获取 .umirc.ts 配置的参数
-    const { strict, exclude } = Object.assign({}, defaultOptions, configRoutes);
+    const { strict, exclude } = Object.assign({}, defaultOptions, filterRoutes);
 
     const filterWalk = routes =>
       routes.filter(i => {
@@ -66,7 +50,7 @@ const configRoutesPlugin = (api: IApi) => {
         }
         // 遍历children
         if (routes) {
-          i.routes = routes ?  filterWalk(routes) : [];
+          i.routes = routes ? filterWalk(routes) : [];
           i.exact = false;
         }
         return true;
@@ -76,4 +60,4 @@ const configRoutesPlugin = (api: IApi) => {
   });
 };
 
-export default configRoutesPlugin;
+export default routeFilterPlugin;
