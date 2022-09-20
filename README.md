@@ -30,6 +30,7 @@ https://lemonreds.github.io/react-components/
 
 ## Hook
 
+* useMultiEffect useEffect的扩展，所有依赖项修改时，才会触发Effect 【2022-09-20】
 * useFontSize 该hook可以提取H5页面在andoird/iOS下，字体缩放的比例 【2021-07-15】
 * useLatestRef 用于解决函数组件闭包陷阱的hook 【2021-07-15】
 * useResizeObserver 监听DOM元素的宽高以及位置变化 【2021-03-04】

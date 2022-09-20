@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import UseMultiEffect from './examples/useMultiEffect';
 import UseFontSize from './examples/useFontSize';
 import UseLatestRef from './examples/useLatestRef';
 import UseDeepCompareEffect from './examples/useDeepCompareEffect';
@@ -13,6 +14,7 @@ import UseInfiniteScroller from './examples/useInfiniteScroller';
 import UseTable from './examples/useTable';
 
 const Comps = [
+  UseMultiEffect,
   UseFontSize,
   UseLatestRef,
   UseDeepCompareEffect,
