@@ -12,8 +12,6 @@ const tuning = 10;
 /**
  * @hook useInfiniteScroller
  * @desc 滚动加载更多列表
- * @by lmh
- * @at 2020/08/25
  * */
 const useInfiniteScroller = ({
   threshold = 0,

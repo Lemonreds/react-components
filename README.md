@@ -58,7 +58,7 @@ https://lemonreds.github.io/react-components/
 | better-scroll | react使用better-scroll的例子 | 2021-05-19 | 
 | swiper | react使用swiper.js/react的例子  | 2021-05-26 | 
 | AliPlayer | react封装AliPlayer的例子  | 2021-05-10 | 
-| react封装AliPlayer的例子 | react-pdf的使用例子以及分页器  | 2021-05-10 | 
+| react-pdf | react-pdf的使用例子以及分页器  | 2021-05-10 | 
 | react-intl | react-intl 的多语言方案,封装了常用的功能 | 2021-04-14 | 
 
  
