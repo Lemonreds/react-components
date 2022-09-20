@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from 'components/Container';
+import Live from './examples/live';
 import RCFastMarquee from './examples/react-fast-marquee';
 import PullToRefresh from './examples/m-pull-to-refresh';
 import StaticRenderer from './examples/staticRenderer';
@@ -11,6 +12,7 @@ import PdfView from './examples/pdf-view';
 import Intls from './examples/intl';
 
 const Comps = [
+  Live,
   RCFastMarquee,
   PullToRefresh,
   StaticRenderer,
