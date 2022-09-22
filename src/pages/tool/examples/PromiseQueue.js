@@ -3,6 +3,7 @@ import Wrapper from 'components/Wrapper';
 import Description from 'components/Description';
 import PromiseQueue from 'tools/PromiseQueue';
 import delay from 'utils/delay';
+import Part from 'components/Part';
 
 export default () => {
   const promiseQueueRef = useRef();
@@ -41,7 +42,7 @@ export default () => {
 
   return (
     <Wrapper label="Promise 串行队列" time="2022-09-20">
-      <p>初始化10个Promise,每个1s后fullfilled</p>
+      <Part>初始化10个Promise,每个1s后fullfilled</Part>
       <p>{state}</p>
       <Description>
         Promise

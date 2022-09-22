@@ -67,6 +67,7 @@ https://lemonreds.github.io/react-components/
 
 | Tool        | 描述             | 时间 |
 | ----------- | ---------------- | ------ |
+| RichTextPick | 富文本HTML标签提取 | 2022-09-20 | 
 | PromiseQueue| Promise 串行队列 | 2022-09-20 | 
 | CSSvariable| 基于CSS变量的换肤 | 2020-09-18 | 
 | StorageTool|  统一用JSON格式来读写localStorage  | 2020-08-26 |
