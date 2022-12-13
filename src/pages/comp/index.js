@@ -14,8 +14,10 @@ import Echarts from './examples/Echarts';
 import VirtualList from './examples/VirtualList';
 import Tabs from './examples/Tabs';
 import Lazyload from './examples/Lazyload';
+import WaterFall from './examples/WaterFall';
 
 const Comps = [
+  WaterFall,
   MarQuee,
   FeedBack,
   TextEllipsis,

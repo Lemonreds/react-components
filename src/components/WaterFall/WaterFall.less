@@ -1,0 +1,38 @@
+.waterFall {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.waterFall-left,
+.waterFall-right {
+  width: calc(50% - 6px);
+  box-sizing: border-box;
+}
+
+.waterFall-left {
+  margin-right: 6px;
+}
+.waterFall-right {
+  margin-left: 6px;
+}
+
+.waterFall-item {
+  width: 100%;
+  box-sizing: border-box;
+  height: fit-content;
+  margin-bottom: 12px;
+}
+
+.waterFall-ready {
+  width: 100%;
+  padding: 0 6px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 0;
+  .waterFall-item {
+    width: 50%;
+  }
+}
